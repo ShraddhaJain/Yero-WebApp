@@ -11,11 +11,6 @@ namespace Yero
 {
     public partial class Contact : Page
     {
-        /// <summary>
-        /// Handles the Load event of the Page control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -30,17 +25,12 @@ namespace Yero
             }
             catch (Exception ex)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - Page_Load", null,true);
+                Audit.CustomErrorUI(ex, "ItivoError: ManageContact.aspx - Page_Load", null);
             }
           
 
         }
 
-        /// <summary>
-        /// Handles the Click event of the btnAddContact control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnAddContact_Click(object sender, EventArgs e)
         {
             try
@@ -72,21 +62,15 @@ namespace Yero
                 bool bl = objManageContact.CreateContact(objContact);
 
                 this.Session["SelectedContact"] = 0; // Remove ContactID from session before view page
-                
-                Audit.CustomLog("End: ManageContact.aspx - btnAddContact_Click", null);
                 Response.Redirect("ViewContact.aspx");
+                Audit.CustomLog("End: ManageContact.aspx - btnAddContact_Click", null);
             }
             catch (Exception ex)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - btnAddContact_Click", null,true);
+                Audit.CustomErrorUI(ex, "ItivoError: ManageContact.aspx - btnAddContact_Click", null);
             }
         }
 
-        /// <summary>
-        /// Handles the Click event of the btnUpdateContact control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnUpdateContact_Click(object sender, EventArgs e)
         {
             try
@@ -120,28 +104,26 @@ namespace Yero
                 DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
                 bool bl = objManageContact.UpdateContact(objContact);
                 this.Session["SelectedContact"] = 0; // Remove ContactID from session after update
-                
-                Audit.CustomLog("End: ManageContact.aspx - btnUpdateContact_Click", null);
                 Response.Redirect("ViewContact.aspx");
 
+                Audit.CustomLog("End: ManageContact.aspx - btnUpdateContact_Click", null);
             }
             catch (Exception ex)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - btnUpdateContact_Click", null,true);
+                Audit.CustomErrorUI(ex, "ItivoError: ManageContact.aspx - btnUpdateContact_Click", null);
             }
             
         }
 
-        /// <summary>
-        /// Fills the contact data to form.
-        /// </summary>
-        /// <param name="ContactID">The contact identifier.</param>
         protected void FillContactDataToForm(int ContactID)
         {
             try
             {
                 Audit.CustomLog("Start: ManageContact.aspx - FillContactDataToForm", ContactID);
 
+                Audit.CustomLog("End: ManageContact.aspx - FillContactDataToForm",ContactID);
+
+                Audit.CustomErrorUI(ex, "ItivoError: ManageContact.aspx - FillContactDataToForm", ContactID);
                 if (ContactID > 0)
                 {
 
@@ -192,27 +174,19 @@ namespace Yero
                     //-------//
                 }
 
-                Audit.CustomLog("End: ManageContact.aspx - FillContactDataToForm", ContactID);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillContactDataToForm", ContactID,false);
+                
                 throw;
             }
         
         }
 
-        /// <summary>
-        /// Handles the Click event of the btnDeleteContact control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         protected void btnDeleteContact_Click(object sender, EventArgs e)
         {
             try
             {
-                Audit.CustomLog("Start: ManageContact.aspx - btnDeleteContact_Click", null);
-
                 BusinessObjects.Contact objContact = new BusinessObjects.Contact();
                 objContact.Cont_id = Convert.ToInt16(lblContactIdValue.Text);
 
@@ -220,14 +194,12 @@ namespace Yero
                 objManageContact.DeleteContact(objContact);
 
                 this.Session["SelectedContact"] = 0; //Remove contactid from sessoin after delete
-
-                Audit.CustomLog("End: ManageContact.aspx - btnDeleteContact_Click", null);
                 Response.Redirect("ViewContact.aspx");
-
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - btnDeleteContact_Click", null,true);
+                
+                throw;
             }
             
         }

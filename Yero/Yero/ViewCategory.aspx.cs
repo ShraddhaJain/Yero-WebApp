@@ -10,10 +10,20 @@ namespace Yero
 {
     public partial class ViewCategory : System.Web.UI.Page
     {
+        /// <summary>
+        /// Handles the Load event of the Page control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+                if (!IsPostBack)
+                { 
+                 PopulateCategoryTree();
+                }
+               
                 DataTable dtCategory = new DataTable();
                 dtCategory = GetContacts();
                 grdCategory.DataSource = dtCategory;
@@ -27,6 +37,48 @@ namespace Yero
             }
         }
 
+
+        /// <summary>
+        /// Populates the category tree.
+        /// </summary>
+        private void PopulateCategoryTree()
+        {
+            DataTable dt = new DataTable();
+            DataLayer.ManageCategoryDL objManageContact = new DataLayer.ManageCategoryDL();
+            dt = objManageContact.GetAllCategories();
+
+            CreateTreeViewDataTable(dt, 0, null);
+        }
+
+        /// <summary>
+        /// Creates the TreeView data table.
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="parentID">The parent identifier.</param>
+        /// <param name="parentNode">The parent node.</param>
+        private void CreateTreeViewDataTable(DataTable dt, int parentID, TreeNode parentNode)
+        {
+            DataRow[] drs = dt.Select("CategoryParentID = " + parentID.ToString());
+            foreach (DataRow i in drs)
+            {
+                TreeNode newNode = new TreeNode(i["categoryname"].ToString(), i["CategoryID"].ToString());
+                if (parentNode == null)
+                {
+                    TVCategory.Nodes.Add(newNode);
+                }
+                else
+                {
+                    parentNode.ChildNodes.Add(newNode);
+                }
+                CreateTreeViewDataTable(dt, Convert.ToInt32(i["CategoryID"]), newNode);
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the contacts.
+        /// </summary>
+        /// <returns></returns>
         DataTable GetContacts()
         {
             try
@@ -43,6 +95,11 @@ namespace Yero
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnEditCategory control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnEditCategory_Click(object sender, EventArgs e)
         {
             try
@@ -64,6 +121,11 @@ namespace Yero
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnAddCategory control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnAddCategory_Click(object sender, EventArgs e)
         {
             try
@@ -79,6 +141,11 @@ namespace Yero
             }
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the grdCategory control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void grdCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             try

@@ -10,6 +10,11 @@ namespace Yero
 {
     public partial class ManageCategory : System.Web.UI.Page
     {
+        /// <summary>
+        /// Handles the Load event of the Page control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -18,6 +23,11 @@ namespace Yero
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnAddCategory control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnAddCategory_Click(object sender, EventArgs e)
         {
             try
@@ -41,6 +51,11 @@ namespace Yero
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnUpdateCategory control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnUpdateCategory_Click(object sender, EventArgs e)
         {
             try
@@ -65,6 +80,11 @@ namespace Yero
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnDeleteCategory control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnDeleteCategory_Click(object sender, EventArgs e)
         {
             try
@@ -89,6 +109,10 @@ namespace Yero
             }
         }
 
+        /// <summary>
+        /// Fills the category data to form.
+        /// </summary>
+        /// <param name="CategoryId">The category identifier.</param>
         protected void FillCategoryDataToForm(int CategoryId)
         {
             try

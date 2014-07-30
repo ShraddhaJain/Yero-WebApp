@@ -10,16 +10,14 @@ using System.IO;
 using Microsoft.Practices.EnterpriseLibrary.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
+//using Microsoft.Practices.Unity;
 using MySql.Data.MySqlClient;
 
 namespace Yero.DataLayer
 {
     public class ManageContactDL
     {
-
-        /// <summary>
-        /// Initializes the <see cref="ManageContactDL"/> class.
-        /// </summary>
+        
         static ManageContactDL()
         {
            // DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
@@ -36,25 +34,26 @@ namespace Yero.DataLayer
             try
             {
 
-                Audit.CustomLog("Start: ManageContactDL.aspx - GetAllContacts", null);
-              
+                Audit.CustomLog("Start: ManageContactDL.aspx - ", null);
+                Audit.CustomLog("End: ManageContactDL.aspx - ", null);
 
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
                 conn.Open();
+
             
                 DbCommand dbCommand = db.GetStoredProcCommand("spGetAllContacts");
 
                 DataSet ds = db.ExecuteDataSet(dbCommand);
-                Audit.CustomLog("End: ManageContactDL.aspx - GetAllContacts", null);
 
                 return ds.Tables[0];
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContactDL.aspx - GetAllContacts", null, false);
+                
+                Audit.CustomError(ex, "ItivoError: ManageContactDL.aspx - ", null,false);
                 throw;
             }
         }
@@ -70,8 +69,6 @@ namespace Yero.DataLayer
 
             try
             {
-                Audit.CustomLog("Start: ManageContactDL.aspx - CreateContact", objContact);
-
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
@@ -102,13 +99,12 @@ namespace Yero.DataLayer
 
                 DataSet ds = db.ExecuteDataSet(dbCommand); 
             
-                Audit.CustomLog("End: ManageContactDL.aspx - CreateContact", objContact);
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContactDL.aspx - CreateContact", objContact, false);
+                
                 throw;
             }
          }
@@ -123,13 +119,12 @@ namespace Yero.DataLayer
 
             try
             {
-                Audit.CustomLog("Start: ManageContactDL.aspx - GetContactDetails", ContactId);
-               
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
                 conn.Open();
 
+            
                 DbCommand dbCommand = db.GetStoredProcCommand("spGetContactDetails");
                 db.AddInParameter(dbCommand, "ContactID", DbType.Int64, ContactId);
 
@@ -158,27 +153,21 @@ namespace Yero.DataLayer
                 objContact.Blog_id = row["BLOG_ID"].ToString();
                 objContact.Website_url = row["WEBSITE_URL"].ToString();
 
-                Audit.CustomLog("End: ManageContactDL.aspx - GetContactDetails", ContactId);
                 return objContact;
+
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContactDL.aspx - GetContactDetails", ContactId, false);
+                
                 throw;
             }
         }
 
-        /// <summary>
-        /// Updates the contact.
-        /// </summary>
-        /// <param name="objContact">The object contact.</param>
-        /// <returns></returns>
         public bool UpdateContact(BusinessObjects.Contact objContact)
         {
+
             try
             {
-                Audit.CustomLog("Start: ManageContactDL.aspx - UpdateContact", objContact);
-
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
@@ -210,29 +199,21 @@ namespace Yero.DataLayer
 
                 DataSet ds = db.ExecuteDataSet(dbCommand);
 
-                Audit.CustomLog("End: ManageContactDL.aspx - UpdateContact", objContact);
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContactDL.aspx - UpdateContact", objContact, false);
+                
                 throw;
             }
         }
 
-
-        /// <summary>
-        /// Deletes the contact.
-        /// </summary>
-        /// <param name="objContact">The object contact.</param>
         public void DeleteContact(BusinessObjects.Contact objContact)
         {
             try
             {
-                Audit.CustomLog("Start: ManageContactDL.aspx - DeleteContact", objContact);
-               
-               DatabaseProviderFactory factory = new DatabaseProviderFactory();
+                DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
                 conn.Open();
@@ -242,11 +223,11 @@ namespace Yero.DataLayer
                 db.AddInParameter(dbCommand, "UPDATE_BY", DbType.String, BusinessObjects.LoggedInUser.User_ID);
 
                 DataSet ds = db.ExecuteDataSet(dbCommand);
-                Audit.CustomLog("End: ManageContactDL.aspx - DeleteContact", objContact);
+
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContactDL.aspx - DeleteContact", objContact, false);
+                
                 throw;
             }
         }

@@ -10,7 +10,6 @@ using System.IO;
 using Microsoft.Practices.EnterpriseLibrary.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
-//using Microsoft.Practices.Unity;
 using MySql.Data.MySqlClient;
 
 
@@ -19,19 +18,27 @@ namespace Yero.DataLayer
     public class ManageCategoryDL
     {
 
+        /// <summary>
+        /// Initializes the <see cref="ManageCategoryDL"/> class.
+        /// </summary>
         static ManageCategoryDL()
         {
-            DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
+           // DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
         }
 
 
+        /// <summary>
+        /// Gets all categories.
+        /// </summary>
+        /// <returns></returns>
         public DataTable GetAllCategories()
         {
 
             try
             {
+
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
-                Database db = factory.Create("ecommerce");
+                Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
                 conn.Open();
 
@@ -50,13 +57,18 @@ namespace Yero.DataLayer
         }
 
 
+        /// <summary>
+        /// Creates the category.
+        /// </summary>
+        /// <param name="objCategory">The object category.</param>
+        /// <returns></returns>
         public bool CreateCategory(BusinessObjects.Category objCategory)
         {
 
             try
             {
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
-                Database db = factory.Create("ecommerce");
+                Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
                 conn.Open();
 
@@ -79,13 +91,18 @@ namespace Yero.DataLayer
         }
 
 
+        /// <summary>
+        /// Gets the category details.
+        /// </summary>
+        /// <param name="CategoryID">The category identifier.</param>
+        /// <returns></returns>
         public BusinessObjects.Category GetCategoryDetails(int CategoryID)
         {
 
             try
             {
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
-                Database db = factory.Create("ecommerce");
+                Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
                 conn.Open();
 
@@ -114,12 +131,17 @@ namespace Yero.DataLayer
             }
         }
 
+        /// <summary>
+        /// Updates the category.
+        /// </summary>
+        /// <param name="objCatogory">The object catogory.</param>
+        /// <returns></returns>
         public bool UpdateCategory(BusinessObjects.Category objCatogory)
         {
             try
             {
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
-                Database db = factory.Create("ecommerce");
+                Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
                 conn.Open();
 
@@ -144,12 +166,16 @@ namespace Yero.DataLayer
 
         }
 
+        /// <summary>
+        /// Deletes the category.
+        /// </summary>
+        /// <param name="objCategory">The object category.</param>
         public void DeleteCategory(BusinessObjects.Category objCategory)
         {
             try
             {
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
-                Database db = factory.Create("ecommerce");
+                Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
                 conn.Open();
 
@@ -158,7 +184,8 @@ namespace Yero.DataLayer
                 db.AddInParameter(dbCommand, "Update_By", DbType.String, BusinessObjects.LoggedInUser.User_ID);
 
                 DataSet ds = db.ExecuteDataSet(dbCommand);
-
+                
+                
 
             }
             catch (Exception)

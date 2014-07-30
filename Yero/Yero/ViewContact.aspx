@@ -5,7 +5,7 @@
     <table id="tblContactgrid">
         <tr>
             <td>
-
+                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                 <asp:GridView ID="grdContact" runat="server" AutoGenerateColumns="false" OnSelectedIndexChanged="grdContact_SelectedIndexChanged" AutoGenerateSelectButton="true">
                     <Columns >
                         <asp:BoundField DataField="CONT_ID" HeaderText="ID" />

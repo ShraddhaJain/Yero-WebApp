@@ -44,6 +44,38 @@
         </tr>
         <tr>
             <td>
+                <asp:Label ID="lblUserName" runat="server" Text="UserName"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtUserName" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="lblPassword" runat="server" Text="Password"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="lblSecurityQue" runat="server" Text="Security Question?"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtSecurityQue" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="lblSecurityAns" runat="server" Text="Security Answer"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtSecurityAns" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <asp:Label ID="lblOrderNo" runat="server" Text="Order Number"></asp:Label>
             </td>
             <td>

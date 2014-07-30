@@ -2,10 +2,17 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
          <table id="tblCategorygrid">
+             <tr>
+                 <td>
+                     <asp:TreeView ID="TVCategory" runat="server"></asp:TreeView>
+                 </td>
+
+             </tr>
+
         <tr>
             <td>
 
-                <asp:GridView ID="grdCategory" runat="server" AutoGenerateColumns="false" AutoGenerateSelectButton="true" OnSelectedIndexChanged="grdCategory_SelectedIndexChanged">
+                <asp:GridView Visible="false" ID="grdCategory" runat="server" AutoGenerateColumns="false" AutoGenerateSelectButton="true" OnSelectedIndexChanged="grdCategory_SelectedIndexChanged">
                     <Columns >
                         <asp:BoundField DataField="CategoryID" HeaderText="ID" />
                         <asp:BoundField DataField="CategoryName" HeaderText="Name" />
@@ -25,6 +32,4 @@
             </td>
         </tr>
     </table>
-
-
 </asp:Content>

@@ -68,6 +68,54 @@ namespace BusinessObjects
                 cont_email_id = value;
             }
         }
+        private System.String username;
+        public System.String UserName
+        {
+            get
+            {
+                return username;
+            }
+            set
+            {
+                username = value;
+            }
+        }
+        private System.String password;
+        public System.String Password
+        {
+            get
+            {
+                return password;
+            }
+            set
+            {
+                password = value;
+            }
+        }
+        private System.String securityquestion;
+        public System.String SecurityQuestion
+        {
+            get
+            {
+                return securityquestion;
+            }
+            set
+            {
+                securityquestion = value;
+            }
+        }
+        private System.String securityanswer;
+        public System.String SecurityAnswer
+        {
+            get
+            {
+                return securityanswer;
+            }
+            set
+            {
+                securityanswer = value;
+            }
+        }
         private System.Int32 cont_order_no;
         public System.Int32 Cont_order_no
         {
