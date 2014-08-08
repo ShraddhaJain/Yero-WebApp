@@ -463,7 +463,7 @@ namespace Yero.DataLayer
             catch (Exception ex)
             {
                 Audit.CustomError(ex, "ItivoError: ManageContactDL.aspx - ValidateUser", UserName, false);
-                throw;
+                throw ex;
             }
         }
     }
