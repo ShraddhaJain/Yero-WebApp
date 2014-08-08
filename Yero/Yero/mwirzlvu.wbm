@@ -23,7 +23,6 @@ namespace Yero
                 Audit.CustomLog(" Start: ManageContact.aspx - Page_Load", null);
                 if (!IsPostBack)
                 {
-                    FillDropdowns();
 
                     FillContactDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
                     FillAddressDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
@@ -39,175 +38,7 @@ namespace Yero
           
         }
 
-        protected void FillDropdowns() 
-        {
-            try
-            {
-                Audit.CustomLog(" Start: ManageContact.aspx - FillDropdowns","FillDropdowns");
-                
-                //Phone Dropdown
-                DataLayer.ManageLookupDL objManageLookup = new DataLayer.ManageLookupDL();
-                DataTable dtPhone = objManageLookup.GetLookupDetailValues("phone");
-                ddPhoneType.DataSource = dtPhone;
-                ddPhoneType.DataTextField = "CODE_DT_NAME";
-                ddPhoneType.DataValueField = "CODE_DT_ID";
-                ddPhoneType.DataBind();
-
-                DataTable dtAddress = objManageLookup.GetLookupDetailValues("address");
-                ddAddressType.DataSource = dtAddress;
-                ddAddressType.DataTextField = "CODE_DT_NAME";
-                ddAddressType.DataValueField = "CODE_DT_ID";
-                ddAddressType.DataBind();
-
-                Audit.CustomLog(" End: ManageContact.aspx - FillDropdowns","FillDropdowns");
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - Page_Load", null, false);
-                throw;
-            }
-        }
-
-
-        /// <summary>
-        /// Fills the contact data to form.
-        /// </summary>
-        /// <param name="ContactID">The contact identifier.</param>
-        protected void FillContactDataToForm(int ContactID)
-        {
-            try
-            {
-                Audit.CustomLog(" Start: ManageContact.aspx - FillContactDataToForm", ContactID);
-
-                if (ContactID > 0)
-                {
-
-                    //----Show controls as per Update---//
-                    btnAddContact.Visible = false;
-                    btnUpdateContact.Visible = true;
-                    btnDeleteContact.Visible = true;
-
-                    lblContactId.Visible = true;
-                    lblContactIdValue.Visible = true;
-                    lblContactIdValue.Text = ContactID.ToString();
-                    //----//
-
-                    DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                    BusinessObjects.Contact objContact = objManageContact.GetContactDetails(Convert.ToInt16(ContactID));
-
-                    txtFname.Text = objContact.Cont_f_name;
-                    txtLname.Text = objContact.Cont_l_name;
-                    txtMname.Text = objContact.Cont_m_name;
-                    txtEmail.Text = objContact.Cont_email_id;
-                    txtUserName.Text = objContact.UserName;
-                    txtPassword.Text = objContact.Password;
-                    txtSecurityQue.Text = objContact.SecurityQuestion;
-                    txtSecurityAns.Text = objContact.SecurityAnswer;
-                    txtOrderNo.Text = objContact.Cont_order_no.ToString();
-                    txtSkypeId.Text = objContact.Skype_id;
-                    txtFacebookId.Text = objContact.Facebook_id;
-                    txtLinkedinId.Text = objContact.Linkedin_id;
-                    txtTwitterId.Text = objContact.Twitter_id;
-                    txtGoogleplusId.Text = objContact.Googleplus_id;
-                    txtLink1Id.Text = objContact.Link1_id;
-                    txtLink2Id.Text = objContact.Link2_id;
-                    txtLink3Id.Text = objContact.Link3_id;
-                    txtBlogId.Text = objContact.Blog_id;
-                    txtWebsiteUrl.Text = objContact.Website_url;
-
-                }
-                else
-                {
-                    //----Show controls as per Add---//
-                    btnAddContact.Visible = true;
-                    btnUpdateContact.Visible = false;
-                    btnDeleteContact.Visible = false;
-
-                    lblContactId.Visible = false;
-                    lblContactIdValue.Visible = false;
-                    lblContactIdValue.Text = "";
-                    //-------//
-                }
-
-                Audit.CustomLog(" End: ManageContact.aspx - FillContactDataToForm", ContactID);
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillContactDataToForm", ContactID, false);
-                throw;
-            }
-
-        }
-
-        /// <summary>
-        /// Fills the address data to form.
-        /// </summary>
-        /// <param name="ContactID">The contact identifier.</param>
-        protected void FillAddressDataToForm(int ContactID)
-        {
-            try
-            {
-                Audit.CustomLog(" Start: ManageContact.aspx - FillAddressDataToForm", ContactID);
-                DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                BusinessObjects.Address objAddress = objManageContact.GetAddressDetails(Convert.ToInt16(ContactID));
-
-                lblAddressID.Text = objAddress.Post_add_id.ToString();
-                txtAddressLine1.Text = objAddress.Post_add_line_1;
-                txtAddressLine2.Text = objAddress.Post_add_line_2;
-                txtAddressLine3.Text = objAddress.Post_add_line_3;
-                txtCounty.Text = objAddress.Post_county;
-                txtAddressInfo1.Text = objAddress.Post_add_info_1;
-                txtAddressInfo2.Text = objAddress.Post_add_info_2;
-                txtAddressAttention.Text = objAddress.Post_add_attn;
-                txtPostalStreet.Text = objAddress.Post_add_po_street;
-                txtCity.Text = objAddress.Post_add_city;
-                txtState.Text = objAddress.Post_add_state;
-                txtPostalCode.Text = objAddress.Post_add_postal_code;
-                txtCountry.Text = objAddress.Post_add_country;
-                //txtAddressType.Text = objAddress.Post_add_type;
-                ddAddressType.SelectedValue = objAddress.Post_add_type;
-
-                Audit.CustomLog(" End: ManageContact.aspx - FillAddressDataToForm", ContactID);
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillAddressDataToForm", ContactID, false);
-                throw;
-            }
-
-        }
-
-        /// <summary>
-        /// Fills the phone data to form.
-        /// </summary>
-        /// <param name="ContactID">The contact identifier.</param>
-        protected void FillPhoneDataToForm(int ContactID)
-        {
-            try
-            {
-                Audit.CustomLog(" Start: ManageContact.aspx - FillPhoneDataToForm", ContactID);
-
-                DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                BusinessObjects.Phone objPhone = objManageContact.GetPhoneDetails(Convert.ToInt16(ContactID));
-
-                lblPhoneID.Text = objPhone.Phone_id.ToString();
-                txtPhoneArea.Text = objPhone.Phone_area;
-                txtPhoneCountry.Text = objPhone.Phone_country;
-                txtPhoneNumber.Text = objPhone.Phone_number;
-                //txtPhoneType.Text = objPhone.Phone_type;
-                ddAddressType.SelectedValue = objPhone.Phone_type;
-
-                Audit.CustomLog(" End: ManageContact.aspx - FillPhoneDataToForm", ContactID);
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillPhoneDataToForm", ContactID, false);
-                throw;
-            }
-
-        }
-
-
+        
         /// <summary>
         /// Handles the Click event of the btnAddContact control.
         /// </summary>
@@ -254,8 +85,7 @@ namespace Yero
                 objAddress.Post_add_po_street = txtPostalStreet.Text.ToString();
                 objAddress.Post_add_postal_code = txtPostalCode.Text.ToString();
                 objAddress.Post_add_state = txtState.Text.ToString();
-                //objAddress.Post_add_type = txtAddressType.Text.ToString();
-                objAddress.Post_add_type = ddAddressType.SelectedValue;
+                objAddress.Post_add_type = txtAddressType.Text.ToString();
                 objAddress.Post_county = txtCounty.Text.ToString();
 
 
@@ -265,12 +95,10 @@ namespace Yero
                 objPhone.Phone_area = txtPhoneArea.Text;
                 objPhone.Phone_country = txtPhoneCountry.Text;
                 objPhone.Phone_number = txtPhoneNumber.Text;
-                //objPhone.Phone_type = txtPhoneType.Text;
-                objPhone.Phone_type = ddPhoneType.SelectedValue;
+                objPhone.Phone_type = txtPhoneType.Text;
 
                 DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                bool bl = objManageContact.UpdateContactProfile(objContact, objAddress, objPhone);
-
+                bool bl = objManageContact.CreateContactProfile(objContact,objAddress,objPhone);
 
                 this.Session["SelectedContact"] = 0; // Remove ContactID from session before view page
 
@@ -318,9 +146,9 @@ namespace Yero
                 objContact.Website_url = txtWebsiteUrl.Text.ToString();
 
 
+                //Check if the address is already exist then Update Address else Insert Address
                 BusinessObjects.Address objAddress = new BusinessObjects.Address();
                 objAddress.Post_add_id = Convert.ToInt16(lblAddressID.Text);
-                objAddress.Cont_id = Convert.ToInt16(lblContactIdValue.Text);
                 objAddress.Post_add_line_1 = txtAddressLine1.Text.Trim();
                 objAddress.Post_add_line_2 = txtAddressLine2.Text.Trim();
                 objAddress.Post_add_line_3 = txtAddressLine3.Text.Trim();
@@ -333,26 +161,25 @@ namespace Yero
                 objAddress.Post_add_state = txtState.Text.Trim();
                 objAddress.Post_add_postal_code = txtPostalCode.Text.Trim();
                 objAddress.Post_add_country = txtCountry.Text.Trim();
-                //objAddress.Post_add_type = txtAddressType.Text.Trim(); 
-                objAddress.Post_add_type = ddAddressType.SelectedValue;
+                objAddress.Post_add_type = txtAddressType.Text.Trim(); 
       
               
-                BusinessObjects.Phone objPhone = new BusinessObjects.Phone();
-                objPhone.Cont_id = Convert.ToInt16(lblContactIdValue.Text);
-                objPhone.Phone_id = Convert.ToInt16(lblPhoneID.Text);
-                objPhone.Phone_area = txtPhoneArea.Text;
-                objPhone.Phone_country = txtPhoneCountry.Text;
-                objPhone.Phone_number = txtPhoneNumber.Text;
-                //objPhone.Phone_type = txtPhoneType.Text;
-                objPhone.Phone_type = ddPhoneType.SelectedValue;
+                //Check if the Phone is already exist then Update Phone else Insert Phone
+                if (Convert.ToInt16(lblPhoneID.Text) == 0)
+                {
+                    //Insert Phone
+                }
+                else
+                {
+                    //Update Phone
+                }
 
                 DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                bool bl = objManageContact.UpdateContactProfile(objContact,objAddress,objPhone);
-
+                bool bl = objManageContact.UpdateContact(objContact);
                 this.Session["SelectedContact"] = 0; // Remove ContactID from session after update
 
                 Audit.CustomLog(" End: ManageContact.aspx - btnUpdateContact_Click", null);
-                Response.Redirect("~/ViewContact.aspx",false);
+                Response.Redirect("ViewContact.aspx");
 
             }
             catch (Exception ex)
@@ -392,7 +219,144 @@ namespace Yero
             
         }
 
-       
+        /// <summary>
+        /// Fills the contact data to form.
+        /// </summary>
+        /// <param name="ContactID">The contact identifier.</param>
+        protected void FillContactDataToForm(int ContactID)
+        {
+            try
+            {
+                Audit.CustomLog(" Start: ManageContact.aspx - FillContactDataToForm", ContactID);
+
+                if (ContactID > 0)
+                {
+
+                    //----Show controls as per Update---//
+                    btnAddContact.Visible = false;
+                    btnUpdateContact.Visible = true;
+                    btnDeleteContact.Visible = true;
+
+                    lblContactId.Visible = true;
+                    lblContactIdValue.Visible = true;
+                    lblContactIdValue.Text = ContactID.ToString();
+                    //----//
+
+                    DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
+                    BusinessObjects.Contact objContact = objManageContact.GetContactDetails(Convert.ToInt16(ContactID));
+
+                    txtFname.Text = objContact.Cont_f_name;
+                    txtLname.Text = objContact.Cont_l_name;
+                    txtMname.Text = objContact.Cont_m_name;
+                    txtEmail.Text = objContact.Cont_email_id;
+                    txtUserName.Text=objContact.UserName;
+                    txtPassword.Text=objContact.Password;
+                    txtSecurityQue.Text=objContact.SecurityQuestion;
+                    txtSecurityAns.Text=objContact.SecurityAnswer;
+                    txtOrderNo.Text = objContact.Cont_order_no.ToString();
+                    txtSkypeId.Text = objContact.Skype_id;
+                    txtFacebookId.Text = objContact.Facebook_id;
+                    txtLinkedinId.Text = objContact.Linkedin_id;
+                    txtTwitterId.Text = objContact.Twitter_id;
+                    txtGoogleplusId.Text = objContact.Googleplus_id;
+                    txtLink1Id.Text = objContact.Link1_id;
+                    txtLink2Id.Text = objContact.Link2_id;
+                    txtLink3Id.Text = objContact.Link3_id;
+                    txtBlogId.Text = objContact.Blog_id;
+                    txtWebsiteUrl.Text = objContact.Website_url;
+
+                }
+                else
+                {
+                    //----Show controls as per Add---//
+                    btnAddContact.Visible = true;
+                    btnUpdateContact.Visible = false;
+                    btnDeleteContact.Visible = false;
+
+                    lblContactId.Visible = false;
+                    lblContactIdValue.Visible = false;
+                    lblContactIdValue.Text = "";
+                    //-------//
+                }
+
+                Audit.CustomLog(" End: ManageContact.aspx - FillContactDataToForm", ContactID);
+            }
+            catch (Exception ex)
+            {
+                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillContactDataToForm", ContactID,false);
+                throw;
+            }
+        
+        }
+
+        /// <summary>
+        /// Fills the address data to form.
+        /// </summary>
+        /// <param name="ContactID">The contact identifier.</param>
+        protected void FillAddressDataToForm(int ContactID)
+        {
+            try
+            {
+                Audit.CustomLog(" Start: ManageContact.aspx - FillAddressDataToForm", ContactID);
+                DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
+                BusinessObjects.Address objAddress = objManageContact.GetAddressDetails(Convert.ToInt16(ContactID));
+
+                lblAddressID.Text =  objAddress.Post_add_id.ToString();
+                txtAddressLine1.Text =  objAddress.Post_add_line_1;		
+                txtAddressLine2.Text=   objAddress.Post_add_line_2;		
+                txtAddressLine3.Text =  objAddress.Post_add_line_3; 		
+                txtCounty.Text = objAddress.Post_county; 			
+                txtAddressInfo1.Text= objAddress.Post_add_info_1;		
+                txtAddressInfo2.Text = objAddress.Post_add_info_2; 		
+                txtAddressAttention.Text = objAddress.Post_add_attn;		
+                txtPostalStreet.Text = objAddress.Post_add_po_street;	
+                txtCity.Text =  objAddress.Post_add_city;		
+                txtState.Text = objAddress.Post_add_state; 		
+                txtPostalCode.Text = objAddress.Post_add_postal_code; 
+                txtCountry.Text = objAddress.Post_add_country;
+                txtAddressType.Text = objAddress.Post_add_type; 		
+
+
+                Audit.CustomLog(" End: ManageContact.aspx - FillAddressDataToForm", ContactID);
+            }
+            catch (Exception ex)
+            {
+                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillAddressDataToForm", ContactID, false);
+                throw;
+            }
+        
+        }
+
+        /// <summary>
+        /// Fills the phone data to form.
+        /// </summary>
+        /// <param name="ContactID">The contact identifier.</param>
+        protected void FillPhoneDataToForm(int ContactID)
+        {
+            try
+            {
+                Audit.CustomLog(" Start: ManageContact.aspx - FillPhoneDataToForm", ContactID);
+
+                DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
+                BusinessObjects.Phone objPhone = objManageContact.GetPhoneDetails(Convert.ToInt16(ContactID));
+
+                lblPhoneID.Text = objPhone.Phone_id.ToString();
+                txtPhoneArea.Text = objPhone.Phone_area;
+                txtPhoneCountry.Text = objPhone.Phone_country;
+                txtPhoneNumber.Text = objPhone.Phone_number;
+                txtPhoneType.Text = objPhone.Phone_type;
+
+
+                Audit.CustomLog(" End: ManageContact.aspx - FillPhoneDataToForm", ContactID);
+            }
+            catch (Exception ex)
+            {
+                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillPhoneDataToForm", ContactID, false);
+                throw;
+            }
+
+        }
+
 
     }
 }

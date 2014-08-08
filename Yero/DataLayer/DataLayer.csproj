@@ -98,12 +98,15 @@
   <ItemGroup>
     <Compile Include="ManageCategoryDL.cs" />
     <Compile Include="ManageContactDL.cs" />
+    <Compile Include="ManageContactPhoneDL.cs" />
+    <Compile Include="ManageLookupDL.cs" />
+    <Compile Include="ManageRolePermissionsDL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessObjects\Business.csproj">
+    <ProjectReference Include="..\BusinessObjects\BusinessObjects.csproj">
       <Project>{2ed1e27c-db1f-4027-993a-01327ec7bef2}</Project>
-      <Name>Business</Name>
+      <Name>BusinessObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

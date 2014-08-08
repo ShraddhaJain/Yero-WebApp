@@ -4,11 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObjects
+namespace Yero.BusinessObjects
 {
     public static class LoggedInUser
     {
-        public static System.String User_ID { get { return "shr"; } }
-        public static System.String User_Role { get { return "admin"; } }
+        public static System.String User_ID 
+        {
+            set { User_ID = value; }
+            get { return "shr"; } 
+        }
+        public static System.String User_Role 
+        {
+            set { User_Role = value; }
+            get { return "admin"; } 
+        }
     }
 }

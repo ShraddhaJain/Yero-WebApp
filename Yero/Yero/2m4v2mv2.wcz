@@ -11,6 +11,10 @@ namespace Yero
     public class Audit
     {
 
+    
+
+
+
 ///// <summary> 
 ///// Summary description for Audit 
 ///// </summary> 
@@ -23,13 +27,13 @@ namespace Yero
 //    // 
 //    } 
 
- public static void CustomError(Exception ex, string functionName, object p,bool IsUI) 
+ public static void CustomError(Exception ex, string functionName, object p) 
  { 
- String additionalInfo;  
+ String additionalInfo; 
 
  LogEntry logEntry = new LogEntry(); 
  logEntry.Severity = System.Diagnostics.TraceEventType.Error; 
- logEntry.Message = "USER:" + BusinessObjects.LoggedInUser.User_ID + "  " + functionName + " :- PARAM " ; 
+ logEntry.Message = functionName + " :- PARAM " ; 
 
  foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(p)) 
  { 
@@ -47,20 +51,16 @@ namespace Yero
  logEntry.Message = logEntry.Message + Environment.NewLine + ": --Additional Info " + additionalInfo; 
 
 
- Logger.Write(logEntry);
- if (IsUI)
- {
-     HttpContext.Current.Response.Redirect("/Error.aspx");
- }
- }
-
+ Logger.Write(logEntry); 
+ HttpContext.Current.Response.Redirect("/Error.aspx"); 
+ } 
 
  public static void CustomLog(string functionName, object p) 
  { 
 
- LogEntry logEntry = new LogEntry();
+ LogEntry logEntry = new LogEntry(); 
 
- logEntry.Message = "USER:" + BusinessObjects.LoggedInUser.User_ID + "  " + functionName + ": -- "; 
+ logEntry.Message = functionName + ": -- " ; 
 
 foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(p)) 
  { 

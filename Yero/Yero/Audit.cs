@@ -29,7 +29,7 @@ namespace Yero
 
  LogEntry logEntry = new LogEntry(); 
  logEntry.Severity = System.Diagnostics.TraceEventType.Error; 
- logEntry.Message = "USER:" + BusinessObjects.LoggedInUser.User_ID + "  " + functionName + " :- PARAM " ; 
+ logEntry.Message = functionName + " :- PARAM " ; 
 
  foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(p)) 
  { 
@@ -58,9 +58,9 @@ namespace Yero
  public static void CustomLog(string functionName, object p) 
  { 
 
- LogEntry logEntry = new LogEntry();
+ LogEntry logEntry = new LogEntry(); 
 
- logEntry.Message = "USER:" + BusinessObjects.LoggedInUser.User_ID + "  " + functionName + ": -- "; 
+ logEntry.Message = functionName + ": -- " ; 
 
 foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(p)) 
  { 

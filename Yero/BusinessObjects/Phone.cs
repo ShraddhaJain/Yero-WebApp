@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObjects
+namespace Yero.BusinessObjects
 {
-    class Phone
+   public  class Phone
     {
         private System.Int32 phone_id;
         public System.Int32 Phone_id

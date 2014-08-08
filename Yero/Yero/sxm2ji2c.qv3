@@ -48,16 +48,12 @@ namespace Yero
                 //Phone Dropdown
                 DataLayer.ManageLookupDL objManageLookup = new DataLayer.ManageLookupDL();
                 DataTable dtPhone = objManageLookup.GetLookupDetailValues("phone");
-                ddPhoneType.DataSource = dtPhone;
-                ddPhoneType.DataTextField = "CODE_DT_NAME";
-                ddPhoneType.DataValueField = "CODE_DT_ID";
-                ddPhoneType.DataBind();
+                ddPhoneType.DataSource = dt;
+                DropDownList1.DataTextField = "Textfield";//Which you want to display inthe dropdownlist
+                DropDownList1.DataValueField = "Valuefield";
+                DropDownList1.DataBind();
 
                 DataTable dtAddress = objManageLookup.GetLookupDetailValues("address");
-                ddAddressType.DataSource = dtAddress;
-                ddAddressType.DataTextField = "CODE_DT_NAME";
-                ddAddressType.DataValueField = "CODE_DT_ID";
-                ddAddressType.DataBind();
 
                 Audit.CustomLog(" End: ManageContact.aspx - FillDropdowns","FillDropdowns");
             }
@@ -164,8 +160,8 @@ namespace Yero
                 txtState.Text = objAddress.Post_add_state;
                 txtPostalCode.Text = objAddress.Post_add_postal_code;
                 txtCountry.Text = objAddress.Post_add_country;
-                //txtAddressType.Text = objAddress.Post_add_type;
-                ddAddressType.SelectedValue = objAddress.Post_add_type;
+                txtAddressType.Text = objAddress.Post_add_type;
+
 
                 Audit.CustomLog(" End: ManageContact.aspx - FillAddressDataToForm", ContactID);
             }
@@ -194,8 +190,8 @@ namespace Yero
                 txtPhoneArea.Text = objPhone.Phone_area;
                 txtPhoneCountry.Text = objPhone.Phone_country;
                 txtPhoneNumber.Text = objPhone.Phone_number;
-                //txtPhoneType.Text = objPhone.Phone_type;
-                ddAddressType.SelectedValue = objPhone.Phone_type;
+                txtPhoneType.Text = objPhone.Phone_type;
+
 
                 Audit.CustomLog(" End: ManageContact.aspx - FillPhoneDataToForm", ContactID);
             }
@@ -254,8 +250,7 @@ namespace Yero
                 objAddress.Post_add_po_street = txtPostalStreet.Text.ToString();
                 objAddress.Post_add_postal_code = txtPostalCode.Text.ToString();
                 objAddress.Post_add_state = txtState.Text.ToString();
-                //objAddress.Post_add_type = txtAddressType.Text.ToString();
-                objAddress.Post_add_type = ddAddressType.SelectedValue;
+                objAddress.Post_add_type = txtAddressType.Text.ToString();
                 objAddress.Post_county = txtCounty.Text.ToString();
 
 
@@ -265,8 +260,7 @@ namespace Yero
                 objPhone.Phone_area = txtPhoneArea.Text;
                 objPhone.Phone_country = txtPhoneCountry.Text;
                 objPhone.Phone_number = txtPhoneNumber.Text;
-                //objPhone.Phone_type = txtPhoneType.Text;
-                objPhone.Phone_type = ddPhoneType.SelectedValue;
+                objPhone.Phone_type = txtPhoneType.Text;
 
                 DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
                 bool bl = objManageContact.UpdateContactProfile(objContact, objAddress, objPhone);
@@ -333,8 +327,7 @@ namespace Yero
                 objAddress.Post_add_state = txtState.Text.Trim();
                 objAddress.Post_add_postal_code = txtPostalCode.Text.Trim();
                 objAddress.Post_add_country = txtCountry.Text.Trim();
-                //objAddress.Post_add_type = txtAddressType.Text.Trim(); 
-                objAddress.Post_add_type = ddAddressType.SelectedValue;
+                objAddress.Post_add_type = txtAddressType.Text.Trim(); 
       
               
                 BusinessObjects.Phone objPhone = new BusinessObjects.Phone();
@@ -343,8 +336,8 @@ namespace Yero
                 objPhone.Phone_area = txtPhoneArea.Text;
                 objPhone.Phone_country = txtPhoneCountry.Text;
                 objPhone.Phone_number = txtPhoneNumber.Text;
-                //objPhone.Phone_type = txtPhoneType.Text;
-                objPhone.Phone_type = ddPhoneType.SelectedValue;
+                objPhone.Phone_type = txtPhoneType.Text;
+
 
                 DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
                 bool bl = objManageContact.UpdateContactProfile(objContact,objAddress,objPhone);
