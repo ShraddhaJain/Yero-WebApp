@@ -52,9 +52,9 @@ namespace Yero.Account
 
                 if (dtUser.Rows.Count > 0)
                 {
-                   // string password = BusinessObjects.Encryption.DecryptText(dtUser.Rows[0]["password"].ToString());
+                    string password = BusinessObjects.Encryption.DecryptText(dtUser.Rows[0]["password"].ToString());
 
-                    if (dtUser.Rows[0]["password"].ToString() == Password.Text.Trim())
+                    if (password == Password.Text.Trim())
                     {
                         if (dtUser.Rows[0]["active"].ToString() == "ACT")
                         {

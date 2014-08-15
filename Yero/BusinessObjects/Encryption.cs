@@ -20,12 +20,12 @@ namespace Yero.BusinessObjects
 
         public static string EncryptText(string plainText)
         {
-            byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            /*byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
             byte[] cipherTextBytes = Cryptographer.EncryptSymmetric("crp", plainTextBytes);
 
 
             return Convert.ToBase64String(cipherTextBytes);
-            /*
+            * */
 			byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
 
 			byte[] keyBytes = new Rfc2898DeriveBytes(PasswordHash, Encoding.ASCII.GetBytes(SaltKey)).GetBytes(256 / 8);
@@ -46,19 +46,19 @@ namespace Yero.BusinessObjects
 				memoryStream.Close();
 			}
 			return Convert.ToBase64String(cipherTextBytes);
-             * */
+             
 		}
 
         
         public static string DecryptText(string encryptedText)
         {
-
+             /*
             byte[] cipherTextBytes = Encoding.UTF8.GetBytes(encryptedText);
             byte[] PlainTextBytes = Cryptographer.DecryptSymmetric("crp", cipherTextBytes);
 
 
             return Convert.ToBase64String(PlainTextBytes);
-            /*
+           */
            byte[] cipherTextBytes = Convert.FromBase64String(encryptedText);
 			byte[] keyBytes = new Rfc2898DeriveBytes(PasswordHash, Encoding.ASCII.GetBytes(SaltKey)).GetBytes(256 / 8);
 			var symmetricKey = new RijndaelManaged() { Mode = CipherMode.CBC, Padding = PaddingMode.None };
@@ -72,7 +72,7 @@ namespace Yero.BusinessObjects
 			memoryStream.Close();
 			cryptoStream.Close();
 			return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount).TrimEnd("\0".ToCharArray());
-		*/
+		
             }
         }
 

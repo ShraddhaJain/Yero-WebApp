@@ -101,6 +101,7 @@
     <Compile Include="ManageContactPhoneDL.cs" />
     <Compile Include="ManageLookupDL.cs" />
     <Compile Include="ManageRolePermissionsDL.cs" />
+    <Compile Include="ManageSearchContactDL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

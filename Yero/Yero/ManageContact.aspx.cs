@@ -23,8 +23,7 @@ namespace Yero
                 Audit.CustomLog(" Start: ManageContact.aspx - Page_Load", null);
                 if (!IsPostBack)
                 {
-                    FillDropdowns();
-
+                  
                     FillContactDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
                     FillAddressDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
                     FillPhoneDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
@@ -39,34 +38,6 @@ namespace Yero
           
         }
 
-        protected void FillDropdowns() 
-        {
-            try
-            {
-                Audit.CustomLog(" Start: ManageContact.aspx - FillDropdowns","FillDropdowns");
-                
-                //Phone Dropdown
-                DataLayer.ManageLookupDL objManageLookup = new DataLayer.ManageLookupDL();
-                DataTable dtPhone = objManageLookup.GetLookupDetailValues("phone");
-                ddPhoneType.DataSource = dtPhone;
-                ddPhoneType.DataTextField = "CODE_DT_NAME";
-                ddPhoneType.DataValueField = "CODE_DT_ID";
-                ddPhoneType.DataBind();
-
-                DataTable dtAddress = objManageLookup.GetLookupDetailValues("address");
-                ddAddressType.DataSource = dtAddress;
-                ddAddressType.DataTextField = "CODE_DT_NAME";
-                ddAddressType.DataValueField = "CODE_DT_ID";
-                ddAddressType.DataBind();
-
-                Audit.CustomLog(" End: ManageContact.aspx - FillDropdowns","FillDropdowns");
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - Page_Load", null, false);
-                throw;
-            }
-        }
 
 
         /// <summary>
@@ -83,7 +54,7 @@ namespace Yero
                 {
 
                     //----Show controls as per Update---//
-                    btnAddContact.Visible = false;
+                   // btnAddContact.Visible = false;
                     btnUpdateContact.Visible = true;
                     btnDeleteContact.Visible = true;
 
@@ -119,7 +90,7 @@ namespace Yero
                 else
                 {
                     //----Show controls as per Add---//
-                    btnAddContact.Visible = true;
+                    //btnAddContact.Visible = true;
                     btnUpdateContact.Visible = false;
                     btnDeleteContact.Visible = false;
 
@@ -149,23 +120,48 @@ namespace Yero
             {
                 Audit.CustomLog(" Start: ManageContact.aspx - FillAddressDataToForm", ContactID);
                 DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                BusinessObjects.Address objAddress = objManageContact.GetAddressDetails(Convert.ToInt16(ContactID));
+                DataTable tblAddress = objManageContact.GetAddressDetails(Convert.ToInt16(ContactID));
 
-                lblAddressID.Text = objAddress.Post_add_id.ToString();
-                txtAddressLine1.Text = objAddress.Post_add_line_1;
-                txtAddressLine2.Text = objAddress.Post_add_line_2;
-                txtAddressLine3.Text = objAddress.Post_add_line_3;
-                txtCounty.Text = objAddress.Post_county;
-                txtAddressInfo1.Text = objAddress.Post_add_info_1;
-                txtAddressInfo2.Text = objAddress.Post_add_info_2;
-                txtAddressAttention.Text = objAddress.Post_add_attn;
-                txtPostalStreet.Text = objAddress.Post_add_po_street;
-                txtCity.Text = objAddress.Post_add_city;
-                txtState.Text = objAddress.Post_add_state;
-                txtPostalCode.Text = objAddress.Post_add_postal_code;
-                txtCountry.Text = objAddress.Post_add_country;
-                //txtAddressType.Text = objAddress.Post_add_type;
-                ddAddressType.SelectedValue = objAddress.Post_add_type;
+                if (tblAddress.Rows.Count > 0)
+                {
+                    foreach (DataRow row in tblAddress.Rows)
+                    {
+                        int AddressType =Convert.ToInt16(row["POST_ADD_TYPE"]);
+                        if (AddressType == 3) //Residential Address
+                        {
+                            lblRAAddressID.Text = row["POST_ADD_ID"].ToString();
+                            txtRAAddressLine1.Text = row["POST_ADD_LINE_1"].ToString();
+                            txtRAAddressLine2.Text = row["POST_ADD_LINE_2"].ToString();
+                            txtRAAddressLine3.Text = row["POST_ADD_LINE_3"].ToString();
+                            txtRACounty.Text = row["POST_COUNTY"].ToString();
+                            txtRAAddressInfo1.Text = row["POST_ADD_INFO_1"].ToString();
+                            txtRAAddressInfo2.Text = row["POST_ADD_INFO_2"].ToString();
+                            txtRAAddressAttention.Text = row["POST_ADD_ATTN"].ToString();
+                            txtRAPostalStreet.Text = row["POST_ADD_PO_STREET"].ToString();
+                            txtRACity.Text = row["POST_ADD_CITY"].ToString();
+                            txtRAState.Text = row["POST_ADD_STATE"].ToString();
+                            txtRAPostalCode.Text = row["POST_ADD_POSTAL_CODE"].ToString();
+                            txtRACountry.Text = row["POST_ADD_COUNTRY"].ToString();
+                        }
+                        else if(AddressType==4) //Postal Address
+                        {
+                            lblPAAddressID.Text = row["POST_ADD_ID"].ToString();
+                            txtPAAddressLine1.Text = row["POST_ADD_LINE_1"].ToString();
+                            txtPAAddressLine2.Text = row["POST_ADD_LINE_2"].ToString();
+                            txtPAAddressLine3.Text = row["POST_ADD_LINE_3"].ToString();
+                            txtPACounty.Text = row["POST_COUNTY"].ToString();
+                            txtPAAddressInfo1.Text = row["POST_ADD_INFO_1"].ToString();
+                            txtPAAddressInfo2.Text = row["POST_ADD_INFO_2"].ToString();
+                            txtPAAddressAttention.Text = row["POST_ADD_ATTN"].ToString();
+                            txtPAPostalStreet.Text = row["POST_ADD_PO_STREET"].ToString();
+                            txtPACity.Text = row["POST_ADD_CITY"].ToString();
+                            txtPAState.Text = row["POST_ADD_STATE"].ToString();
+                            txtPAPostalCode.Text = row["POST_ADD_POSTAL_CODE"].ToString();
+                            txtPACountry.Text = row["POST_ADD_COUNTRY"].ToString();
+                        }
+                        
+                    }
+                }
 
                 Audit.CustomLog(" End: ManageContact.aspx - FillAddressDataToForm", ContactID);
             }
@@ -188,14 +184,37 @@ namespace Yero
                 Audit.CustomLog(" Start: ManageContact.aspx - FillPhoneDataToForm", ContactID);
 
                 DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                BusinessObjects.Phone objPhone = objManageContact.GetPhoneDetails(Convert.ToInt16(ContactID));
+                DataTable dtPhone = objManageContact.GetPhoneDetails(Convert.ToInt16(ContactID));
 
-                lblPhoneID.Text = objPhone.Phone_id.ToString();
-                txtPhoneArea.Text = objPhone.Phone_area;
-                txtPhoneCountry.Text = objPhone.Phone_country;
-                txtPhoneNumber.Text = objPhone.Phone_number;
-                //txtPhoneType.Text = objPhone.Phone_type;
-                ddAddressType.SelectedValue = objPhone.Phone_type;
+                if (dtPhone.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dtPhone.Rows)
+                    {
+                        int PhoneType = Convert.ToInt16( row["PHONE_TYPE"]);
+                        if(PhoneType == 1) //Home Phone
+                        {
+                            lblHomePhoneID.Text = row["PHONE_ID"].ToString();
+                            txtHPPhoneCountry.Text = row["PHONE_COUNTRY"].ToString();
+                            txtHPPhoneArea.Text = row["PHONE_AREA"].ToString();
+                            txtHPPhoneNumber.Text = row["PHONE_NUMBER"].ToString();
+                        }
+                        else if(PhoneType == 2)  //Office Phone
+                        {
+                            lblOfficePhoneID.Text = row["PHONE_ID"].ToString();
+                            txtOPPhoneCountry.Text = row["PHONE_COUNTRY"].ToString();
+                            txtOPPhoneArea.Text = row["PHONE_AREA"].ToString();
+                            txtOPPhoneNumber.Text = row["PHONE_NUMBER"].ToString();
+                        }
+                        else if (PhoneType == 6)  //Mobile
+                        {
+                            lblMobilePhoneID.Text = row["PHONE_ID"].ToString();
+                            txtMPPhoneCountry.Text = row["PHONE_COUNTRY"].ToString();
+                            txtMPPhoneArea.Text = row["PHONE_AREA"].ToString();
+                            txtMPPhoneNumber.Text = row["PHONE_NUMBER"].ToString();
+                        }
+
+                    }
+                }
 
                 Audit.CustomLog(" End: ManageContact.aspx - FillPhoneDataToForm", ContactID);
             }
@@ -209,81 +228,6 @@ namespace Yero
 
 
         /// <summary>
-        /// Handles the Click event of the btnAddContact control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        protected void btnAddContact_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Audit.CustomLog(" Start: ManageContact.aspx - btnAddContact_Click", null);
-               
-                BusinessObjects.Contact objContact = new BusinessObjects.Contact();
-                objContact.Cont_id = Convert.ToInt16(lblContactIdValue.Text);
-                objContact.Cont_f_name = txtFname.Text.ToString();
-                objContact.Cont_l_name = txtLname.Text.ToString();
-                objContact.Cont_m_name = txtMname.Text.ToString();
-                objContact.Cont_email_id = txtEmail.Text.ToString();
-                objContact.UserName = txtUserName.Text.ToString();
-                objContact.Password = txtPassword.Text.ToString();
-                objContact.SecurityQuestion = txtSecurityQue.Text.ToString();
-                objContact.SecurityAnswer = txtSecurityAns.Text.ToString();
-                objContact.Cont_order_no = Convert.ToInt32(txtOrderNo.Text);
-                objContact.Skype_id = txtSkypeId.Text.ToString();
-                objContact.Facebook_id = txtFacebookId.Text.ToString();
-                objContact.Linkedin_id = txtLinkedinId.Text.ToString();
-                objContact.Twitter_id = txtTwitterId.Text.ToString();
-                objContact.Googleplus_id = txtGoogleplusId.Text.ToString();
-                objContact.Link1_id = txtLink1Id.Text.ToString();
-                objContact.Link2_id = txtLink2Id.Text.ToString();
-                objContact.Link3_id = txtLink3Id.Text.ToString();
-                objContact.Blog_id = txtBlogId.Text.ToString();
-                objContact.Website_url = txtWebsiteUrl.Text.ToString();
-
-
-                BusinessObjects.Address objAddress = new BusinessObjects.Address();
-                objAddress.Post_add_attn = txtAddressAttention.Text.ToString();
-                objAddress.Post_add_city = txtCity.Text.ToString();
-                objAddress.Post_add_country = txtCountry.Text.ToString();
-                objAddress.Post_add_info_1 = txtAddressInfo1.Text.ToString();
-                objAddress.Post_add_info_2 = txtAddressInfo2.Text.ToString();
-                objAddress.Post_add_line_1 = txtAddressLine1.Text.ToString();
-                objAddress.Post_add_line_2 = txtAddressLine2.Text.ToString();
-                objAddress.Post_add_line_3 = txtAddressLine3.Text.ToString();
-                objAddress.Post_add_po_street = txtPostalStreet.Text.ToString();
-                objAddress.Post_add_postal_code = txtPostalCode.Text.ToString();
-                objAddress.Post_add_state = txtState.Text.ToString();
-                //objAddress.Post_add_type = txtAddressType.Text.ToString();
-                objAddress.Post_add_type = ddAddressType.SelectedValue;
-                objAddress.Post_county = txtCounty.Text.ToString();
-
-
-                BusinessObjects.Phone objPhone = new BusinessObjects.Phone();
-                objPhone.Cont_id = Convert.ToInt16(this.Session["SelectedContact"]);
-                objPhone.Phone_id = Convert.ToInt16(this.Session["SelectedPhone"]);
-                objPhone.Phone_area = txtPhoneArea.Text;
-                objPhone.Phone_country = txtPhoneCountry.Text;
-                objPhone.Phone_number = txtPhoneNumber.Text;
-                //objPhone.Phone_type = txtPhoneType.Text;
-                objPhone.Phone_type = ddPhoneType.SelectedValue;
-
-                DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                bool bl = objManageContact.UpdateContactProfile(objContact, objAddress, objPhone);
-
-
-                this.Session["SelectedContact"] = 0; // Remove ContactID from session before view page
-
-                Audit.CustomLog(" End: ManageContact.aspx - btnAddContact_Click", null);
-                Response.Redirect("ViewContact.aspx");
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - btnAddContact_Click", null,true);
-            }
-        }
-
-        /// <summary>
         /// Handles the Click event of the btnUpdateContact control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -293,8 +237,7 @@ namespace Yero
             try
             {
                 Audit.CustomLog(" Start: ManageContact.aspx - btnUpdateContact_Click", null);
-
-
+                
                 BusinessObjects.Contact objContact = new BusinessObjects.Contact();
                 objContact.Cont_id =Convert.ToInt16(lblContactIdValue.Text);
                 objContact.Cont_f_name = txtFname.Text.ToString();
@@ -318,36 +261,59 @@ namespace Yero
                 objContact.Website_url = txtWebsiteUrl.Text.ToString();
 
 
-                BusinessObjects.Address objAddress = new BusinessObjects.Address();
-                objAddress.Post_add_id = Convert.ToInt16(lblAddressID.Text);
-                objAddress.Cont_id = Convert.ToInt16(lblContactIdValue.Text);
-                objAddress.Post_add_line_1 = txtAddressLine1.Text.Trim();
-                objAddress.Post_add_line_2 = txtAddressLine2.Text.Trim();
-                objAddress.Post_add_line_3 = txtAddressLine3.Text.Trim();
-                objAddress.Post_county = txtCounty.Text.Trim();
-                objAddress.Post_add_info_1 = txtAddressInfo1.Text.Trim();
-                objAddress.Post_add_info_2 = txtAddressInfo2.Text.Trim();
-                objAddress.Post_add_attn = txtAddressAttention.Text.Trim();
-                objAddress.Post_add_po_street = txtPostalStreet.Text.Trim();
-                objAddress.Post_add_city = txtCity.Text.Trim();
-                objAddress.Post_add_state = txtState.Text.Trim();
-                objAddress.Post_add_postal_code = txtPostalCode.Text.Trim();
-                objAddress.Post_add_country = txtCountry.Text.Trim();
-                //objAddress.Post_add_type = txtAddressType.Text.Trim(); 
-                objAddress.Post_add_type = ddAddressType.SelectedValue;
-      
-              
+                List<BusinessObjects.Address> lstAddress = new List<BusinessObjects.Address>();
+                if (lblRAAddressID.Text != "")
+                {
+                    BusinessObjects.Address objRAAddress = new BusinessObjects.Address();
+                    objRAAddress.Post_add_id = Convert.ToInt16(lblRAAddressID.Text);
+                    objRAAddress.Cont_id = Convert.ToInt16(lblContactIdValue.Text);
+                    objRAAddress.Post_add_line_1 = txtRAAddressLine1.Text.Trim();
+                    objRAAddress.Post_add_line_2 = txtRAAddressLine2.Text.Trim();
+                    objRAAddress.Post_add_line_3 = txtRAAddressLine3.Text.Trim();
+                    objRAAddress.Post_county = txtRACounty.Text.Trim();
+                    objRAAddress.Post_add_info_1 = txtRAAddressInfo1.Text.Trim();
+                    objRAAddress.Post_add_info_2 = txtRAAddressInfo2.Text.Trim();
+                    objRAAddress.Post_add_attn = txtRAAddressAttention.Text.Trim();
+                    objRAAddress.Post_add_po_street = txtRAPostalStreet.Text.Trim();
+                    objRAAddress.Post_add_city = txtRACity.Text.Trim();
+                    objRAAddress.Post_add_state = txtRAState.Text.Trim();
+                    objRAAddress.Post_add_postal_code = txtRAPostalCode.Text.Trim();
+                    objRAAddress.Post_add_country = txtRACountry.Text.Trim();
+                    lstAddress.Add(objRAAddress);
+                }
+
+                if (lblPAAddressID.Text != "")
+                {
+                    BusinessObjects.Address objPAAddress = new BusinessObjects.Address();
+                    objPAAddress.Post_add_id = Convert.ToInt16(lblPAAddressID.Text);
+                    objPAAddress.Cont_id = Convert.ToInt16(lblContactIdValue.Text);
+                    objPAAddress.Post_add_line_1 = txtPAAddressLine1.Text.Trim();
+                    objPAAddress.Post_add_line_2 = txtPAAddressLine2.Text.Trim();
+                    objPAAddress.Post_add_line_3 = txtPAAddressLine3.Text.Trim();
+                    objPAAddress.Post_county = txtPACounty.Text.Trim();
+                    objPAAddress.Post_add_info_1 = txtPAAddressInfo1.Text.Trim();
+                    objPAAddress.Post_add_info_2 = txtPAAddressInfo2.Text.Trim();
+                    objPAAddress.Post_add_attn = txtPAAddressAttention.Text.Trim();
+                    objPAAddress.Post_add_po_street = txtPAPostalStreet.Text.Trim();
+                    objPAAddress.Post_add_city = txtPACity.Text.Trim();
+                    objPAAddress.Post_add_state = txtPAState.Text.Trim();
+                    objPAAddress.Post_add_postal_code = txtPAPostalCode.Text.Trim();
+                    objPAAddress.Post_add_country = txtPACountry.Text.Trim();
+                    lstAddress.Add(objPAAddress);
+                }
+
+
                 BusinessObjects.Phone objPhone = new BusinessObjects.Phone();
                 objPhone.Cont_id = Convert.ToInt16(lblContactIdValue.Text);
-                objPhone.Phone_id = Convert.ToInt16(lblPhoneID.Text);
-                objPhone.Phone_area = txtPhoneArea.Text;
-                objPhone.Phone_country = txtPhoneCountry.Text;
-                objPhone.Phone_number = txtPhoneNumber.Text;
+                objPhone.Phone_id = Convert.ToInt16(lblMobilePhoneID.Text);
+                objPhone.Phone_area = txtMPPhoneArea.Text;
+                objPhone.Phone_country = txtMPPhoneCountry.Text;
+                objPhone.Phone_number = txtMPPhoneNumber.Text;
                 //objPhone.Phone_type = txtPhoneType.Text;
-                objPhone.Phone_type = ddPhoneType.SelectedValue;
+                //objPhone.Phone_type = ddPhoneType.SelectedValue;
 
                 DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                bool bl = objManageContact.UpdateContactProfile(objContact,objAddress,objPhone);
+                bool bl = objManageContact.UpdateContactProfile(objContact, lstAddress, objPhone);
 
                 this.Session["SelectedContact"] = 0; // Remove ContactID from session after update
 

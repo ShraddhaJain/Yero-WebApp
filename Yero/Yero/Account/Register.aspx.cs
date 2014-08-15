@@ -37,8 +37,8 @@ namespace Yero.Account
                 BusinessObjects.Contact objContact = new BusinessObjects.Contact();
 
                 objContact.UserName = txtUserName.Text.ToString().ToUpper();
-                //objContact.Password = BusinessObjects.Encryption.EncryptText(txtPassword.Text.ToString());
-                objContact.Password = txtPassword.Text.ToString();
+                objContact.Password = BusinessObjects.Encryption.EncryptText(txtPassword.Text.ToString());
+                //objContact.Password = txtPassword.Text.ToString();
                 objContact.Cont_email_id = txtEmail.Text.ToString();
                 objContact.SecurityQuestion = txtSecurityQuestion.Text.ToString().ToUpper();
                 objContact.SecurityAnswer = txtSecurityAnswer.Text.ToString().ToUpper();

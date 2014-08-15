@@ -23,15 +23,15 @@ namespace Yero
         {
             try
             {
-                 //Check Contact ID and module Access
-                DataTable dt = HttpContext.Current.Cache["RolePermission"] as DataTable;
-                bool contains = dt.AsEnumerable()
-                   .Any(row => "Contact" == row.Field<String>("PermissionName"));
-                if (!contains)
-                {
-                    //Redirect to login page
-                    Response.Redirect("~/Account/Login.aspx",false);
-                }
+                // //Check Contact ID and module Access
+                //DataTable dt = HttpContext.Current.Cache["RolePermission"] as DataTable;
+                //bool contains = dt.AsEnumerable()
+                //   .Any(row => "Contact" == row.Field<String>("PermissionName"));
+                //if (!contains)
+                //{
+                //    //Redirect to login page
+                //    Response.Redirect("~/Account/Login.aspx",false);
+                //}
 
                 Audit.CustomLog(" Start: ViewContact.aspx - Page_Load", null);
 
