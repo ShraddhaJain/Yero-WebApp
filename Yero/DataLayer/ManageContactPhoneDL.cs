@@ -49,7 +49,7 @@ namespace Yero.DataLayer
             }
         }
 
-
+        #region "CreatePhone"
         /// <summary>
         /// Creates the phone.
         /// </summary>
@@ -88,7 +88,7 @@ namespace Yero.DataLayer
                 throw;
             }
         }
-
+        #endregion
 
         /// <summary>
         /// Gets the phone details.
