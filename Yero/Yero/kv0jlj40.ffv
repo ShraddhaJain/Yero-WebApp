@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+
+
+namespace Yero
+{
+    public partial class ViewPhone : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            FillPhoneDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
+        }
+
+        protected void FillPhoneDataToForm(int ContactID)
+        {
+            try
+            {
+                Audit.CustomLog(" Start: ViewPhone.aspx - FillPhoneDataToForm", ContactID);
+
+                DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
+                DataTable dtPhone = objManageContact.GetPhoneDetails(Convert.ToInt16(ContactID));
+
+                grdPhone.DataSource = dtPhone;
+                grdPhone.DataBind();
+
+
+                Audit.CustomLog(" End: ViewPhone.aspx - FillPhoneDataToForm", ContactID);
+            }
+            catch (Exception ex)
+            {
+                Audit.CustomError(ex, "ItivoError: ViewPhone.aspx - FillPhoneDataToForm", ContactID, false);
+                throw;
+            }
+
+        }
+
+        protected void FillPhoneDataToControls()
+        {
+            GridViewRow row = grdPhone.SelectedRow;
+            lblPhoneID.Text = row.Cells[1].Text;
+            txtPhoneCountry.Text = row.Cells[2].Text;
+            txtPhoneArea.Text = row.Cells[3].Text;
+            txtPhoneNumber.Text = row.Cells[4].Text;
+            
+        }
+
+        protected void btnUpdatePhone_Click(object sender, EventArgs e)
+        {
+              BusinessObjects.Phone objPhone = new BusinessObjects.Phone();
+                objPhone.Cont_id = Convert.ToInt16(this.Session["SelectedContact"]);
+                objPhone.Phone_id = Convert.ToInt16(lblPhoneID.Text);
+                objPhone.Phone_area = txtPhoneArea.Text;
+                objPhone.Phone_country = txtPhoneCountry.Text;
+                objPhone.Phone_number = txtPhoneNumber.Text;
+
+            DataLayer.ManageContactPhoneDL objManageContact = new DataLayer.ManageContactPhoneDL();
+            bool bl = objManageContact.UpdatePhone(objPhone);
+
+        }
+
+    }
+}
