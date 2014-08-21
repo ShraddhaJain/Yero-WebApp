@@ -12,39 +12,40 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using MySql.Data.MySqlClient;
 
+
 namespace Yero.DataLayer
 {
-    public class ManageLookupDL
+    public class ManageOrderDL
     {
-         /// <summary>
-        /// Creates the contact.
-        /// </summary>
-        /// <param name="objContact">The object contact.</param>
-        /// <returns></returns>
-        public DataTable GetLookupDetailValues(string CODE_NAME)
+
+        public DataTable GetProductSearchResult(string ProductDescription)
         {
             try
             {
-                Audit.CustomLog(" Start: ManageContactDL.aspx - CreateContact - ", CODE_NAME);
+
+                Audit.CustomLog(" Start: ManageOrderDL.aspx - GetProductSearchResult", null);
+
 
                 DatabaseProviderFactory factory = new DatabaseProviderFactory();
                 Database db = factory.Create("itivo");
                 DbConnection conn = db.CreateConnection();
                 conn.Open();
-                DbCommand dbCommand = db.GetStoredProcCommand("spGetLookUpDetailValues");
-                db.AddInParameter(dbCommand, "CODE_NAME", DbType.String, CODE_NAME);
-              
-                DataSet ds = db.ExecuteDataSet(dbCommand);
 
-                Audit.CustomLog(" End: ManageContactDL.aspx - CreateContact", CODE_NAME);
+                DbCommand dbCommand = db.GetStoredProcCommand("spSearchProduct");
+                db.AddInParameter(dbCommand, "ProductDescription", DbType.String, ProductDescription);
+
+                DataSet ds = db.ExecuteDataSet(dbCommand);
+                Audit.CustomLog(" End: ManageOrderDL.aspx - GetProductSearchResult", null);
+
                 return ds.Tables[0];
 
             }
             catch (Exception ex)
             {
-                Audit.CustomError(ex, "ItivoError: ManageContactDL.aspx - CreateContact", CODE_NAME, false);
+                Audit.CustomError(ex, "ItivoError: ManageOrderDL.aspx - GetSearchContactResult", null, false);
                 throw;
             }
         }
+    
     }
 }

@@ -176,7 +176,14 @@
         </tr>
         <tr>
             <td>
-                <table id="tblAddress" style="background-color: aliceblue">
+                <asp:Button ID="btnManageAddress"  runat="server" Text="Contact Address" OnClick="btnManageAddress_Click" />
+                <asp:Button ID="btnManagePhone" runat="server" Text="Contact Phone" OnClick="btnManagePhone_Click" />
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <table id="tblAddress" style="background-color: aliceblue" hidden="hidden">
                     <tr>
                         <td>
                             <asp:Label ID="lblAddressHeader" runat="server" Text="Contact Address Details" Font-Bold="True" Font-Size="Large"></asp:Label>
@@ -187,7 +194,7 @@
                             <table id="tblResidentialAddress">
                                 <tr>
                                     <td colspan="2">
-                                         <asp:Label ID="lblResidentialAddress" runat="server" text="Residential Address"></asp:Label>
+                                        <asp:Label ID="lblResidentialAddress" runat="server" Text="Residential Address"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -292,7 +299,7 @@
                             <table id="tblPostalAddress">
                                 <tr>
                                     <td colspan="2">
-                                         <asp:Label ID="lblPostalAddress" runat="server" text="Postal Address"></asp:Label>
+                                        <asp:Label ID="lblPostalAddress" runat="server" Text="Postal Address"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -400,7 +407,7 @@
         </tr>
         <tr>
             <td>
-                <table id="tblPhone" style="background-color: aliceblue">
+                <table id="tblPhone" style="background-color: aliceblue"  hidden="hidden">
                     <tr>
                         <td>
                             <asp:Label ID="LabelPhoneHeading" runat="server" Text="Phone Details" Font-Bold="True" Font-Size="Large"></asp:Label>
@@ -458,7 +465,7 @@
                                         <asp:Label ID="lblOfficePhone" runat="server" Text="Office Phone"></asp:Label>
                                     </td>
                                 </tr>
-                               				<tr>
+                                <tr>
                                     <td>
                                         <asp:Label ID="lblOPPhoneCountry" runat="server" Text="Country"></asp:Label>
                                     </td>
@@ -496,7 +503,7 @@
                                         <asp:Label ID="lblHomePhone" runat="server" Text="Home Phone"></asp:Label>
                                     </td>
                                 </tr>
-                               		<tr>
+                                <tr>
                                     <td>
                                         <asp:Label ID="lblHPPhoneCountry" runat="server" Text="Country"></asp:Label>
                                     </td>

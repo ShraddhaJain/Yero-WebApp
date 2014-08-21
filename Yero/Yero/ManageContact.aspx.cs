@@ -25,8 +25,8 @@ namespace Yero
                 {
                   
                     FillContactDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
-                    FillAddressDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
-                    FillPhoneDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
+                    //FillAddressDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
+                    //FillPhoneDataToForm(Convert.ToInt16(this.Session["SelectedContact"]));
 
                 }
                 Audit.CustomLog(" End: ManageContact.aspx - Page_Load", null);
@@ -110,121 +110,121 @@ namespace Yero
 
         }
 
-        /// <summary>
-        /// Fills the address data to form.
-        /// </summary>
-        /// <param name="ContactID">The contact identifier.</param>
-        protected void FillAddressDataToForm(int ContactID)
-        {
-            try
-            {
-                Audit.CustomLog(" Start: ManageContact.aspx - FillAddressDataToForm", ContactID);
-                DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                DataTable tblAddress = objManageContact.GetAddressDetails(Convert.ToInt16(ContactID));
+        ///// <summary>
+        ///// Fills the address data to form.
+        ///// </summary>
+        ///// <param name="ContactID">The contact identifier.</param>
+        //protected void FillAddressDataToForm(int ContactID)
+        //{
+        //    try
+        //    {
+        //        Audit.CustomLog(" Start: ManageContact.aspx - FillAddressDataToForm", ContactID);
+        //        DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
+        //        DataTable tblAddress = objManageContact.GetAddressDetails(Convert.ToInt16(ContactID));
 
-                if (tblAddress.Rows.Count > 0)
-                {
-                    foreach (DataRow row in tblAddress.Rows)
-                    {
-                        int AddressType =Convert.ToInt16(row["POST_ADD_TYPE"]);
-                        if (AddressType == 3) //Residential Address
-                        {
-                            lblRAAddressID.Text = row["POST_ADD_ID"].ToString();
-                            txtRAAddressLine1.Text = row["POST_ADD_LINE_1"].ToString();
-                            txtRAAddressLine2.Text = row["POST_ADD_LINE_2"].ToString();
-                            txtRAAddressLine3.Text = row["POST_ADD_LINE_3"].ToString();
-                            txtRACounty.Text = row["POST_COUNTY"].ToString();
-                            txtRAAddressInfo1.Text = row["POST_ADD_INFO_1"].ToString();
-                            txtRAAddressInfo2.Text = row["POST_ADD_INFO_2"].ToString();
-                            txtRAAddressAttention.Text = row["POST_ADD_ATTN"].ToString();
-                            txtRAPostalStreet.Text = row["POST_ADD_PO_STREET"].ToString();
-                            txtRACity.Text = row["POST_ADD_CITY"].ToString();
-                            txtRAState.Text = row["POST_ADD_STATE"].ToString();
-                            txtRAPostalCode.Text = row["POST_ADD_POSTAL_CODE"].ToString();
-                            txtRACountry.Text = row["POST_ADD_COUNTRY"].ToString();
-                        }
-                        else if(AddressType==4) //Postal Address
-                        {
-                            lblPAAddressID.Text = row["POST_ADD_ID"].ToString();
-                            txtPAAddressLine1.Text = row["POST_ADD_LINE_1"].ToString();
-                            txtPAAddressLine2.Text = row["POST_ADD_LINE_2"].ToString();
-                            txtPAAddressLine3.Text = row["POST_ADD_LINE_3"].ToString();
-                            txtPACounty.Text = row["POST_COUNTY"].ToString();
-                            txtPAAddressInfo1.Text = row["POST_ADD_INFO_1"].ToString();
-                            txtPAAddressInfo2.Text = row["POST_ADD_INFO_2"].ToString();
-                            txtPAAddressAttention.Text = row["POST_ADD_ATTN"].ToString();
-                            txtPAPostalStreet.Text = row["POST_ADD_PO_STREET"].ToString();
-                            txtPACity.Text = row["POST_ADD_CITY"].ToString();
-                            txtPAState.Text = row["POST_ADD_STATE"].ToString();
-                            txtPAPostalCode.Text = row["POST_ADD_POSTAL_CODE"].ToString();
-                            txtPACountry.Text = row["POST_ADD_COUNTRY"].ToString();
-                        }
+        //        if (tblAddress.Rows.Count > 0)
+        //        {
+        //            foreach (DataRow row in tblAddress.Rows)
+        //            {
+        //                int AddressType =Convert.ToInt16(row["POST_ADD_TYPE"]);
+        //                if (AddressType == 3) //Residential Address
+        //                {
+        //                    lblRAAddressID.Text = row["POST_ADD_ID"].ToString();
+        //                    txtRAAddressLine1.Text = row["POST_ADD_LINE_1"].ToString();
+        //                    txtRAAddressLine2.Text = row["POST_ADD_LINE_2"].ToString();
+        //                    txtRAAddressLine3.Text = row["POST_ADD_LINE_3"].ToString();
+        //                    txtRACounty.Text = row["POST_COUNTY"].ToString();
+        //                    txtRAAddressInfo1.Text = row["POST_ADD_INFO_1"].ToString();
+        //                    txtRAAddressInfo2.Text = row["POST_ADD_INFO_2"].ToString();
+        //                    txtRAAddressAttention.Text = row["POST_ADD_ATTN"].ToString();
+        //                    txtRAPostalStreet.Text = row["POST_ADD_PO_STREET"].ToString();
+        //                    txtRACity.Text = row["POST_ADD_CITY"].ToString();
+        //                    txtRAState.Text = row["POST_ADD_STATE"].ToString();
+        //                    txtRAPostalCode.Text = row["POST_ADD_POSTAL_CODE"].ToString();
+        //                    txtRACountry.Text = row["POST_ADD_COUNTRY"].ToString();
+        //                }
+        //                else if(AddressType==4) //Postal Address
+        //                {
+        //                    lblPAAddressID.Text = row["POST_ADD_ID"].ToString();
+        //                    txtPAAddressLine1.Text = row["POST_ADD_LINE_1"].ToString();
+        //                    txtPAAddressLine2.Text = row["POST_ADD_LINE_2"].ToString();
+        //                    txtPAAddressLine3.Text = row["POST_ADD_LINE_3"].ToString();
+        //                    txtPACounty.Text = row["POST_COUNTY"].ToString();
+        //                    txtPAAddressInfo1.Text = row["POST_ADD_INFO_1"].ToString();
+        //                    txtPAAddressInfo2.Text = row["POST_ADD_INFO_2"].ToString();
+        //                    txtPAAddressAttention.Text = row["POST_ADD_ATTN"].ToString();
+        //                    txtPAPostalStreet.Text = row["POST_ADD_PO_STREET"].ToString();
+        //                    txtPACity.Text = row["POST_ADD_CITY"].ToString();
+        //                    txtPAState.Text = row["POST_ADD_STATE"].ToString();
+        //                    txtPAPostalCode.Text = row["POST_ADD_POSTAL_CODE"].ToString();
+        //                    txtPACountry.Text = row["POST_ADD_COUNTRY"].ToString();
+        //                }
                         
-                    }
-                }
+        //            }
+        //        }
 
-                Audit.CustomLog(" End: ManageContact.aspx - FillAddressDataToForm", ContactID);
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillAddressDataToForm", ContactID, false);
-                throw;
-            }
+        //        Audit.CustomLog(" End: ManageContact.aspx - FillAddressDataToForm", ContactID);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillAddressDataToForm", ContactID, false);
+        //        throw;
+        //    }
 
-        }
+        //}
 
         /// <summary>
         /// Fills the phone data to form.
         /// </summary>
         /// <param name="ContactID">The contact identifier.</param>
-        protected void FillPhoneDataToForm(int ContactID)
-        {
-            try
-            {
-                Audit.CustomLog(" Start: ManageContact.aspx - FillPhoneDataToForm", ContactID);
+        //protected void FillPhoneDataToForm(int ContactID)
+        //{
+        //    try
+        //    {
+        //        Audit.CustomLog(" Start: ManageContact.aspx - FillPhoneDataToForm", ContactID);
 
-                DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                DataTable dtPhone = objManageContact.GetPhoneDetails(Convert.ToInt16(ContactID));
+        //        DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
+        //        DataTable dtPhone = objManageContact.GetPhoneDetails(Convert.ToInt16(ContactID));
 
-                if (dtPhone.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dtPhone.Rows)
-                    {
-                        int PhoneType = Convert.ToInt16( row["PHONE_TYPE"]);
-                        if(PhoneType == 1) //Home Phone
-                        {
-                            lblHomePhoneID.Text = row["PHONE_ID"].ToString();
-                            txtHPPhoneCountry.Text = row["PHONE_COUNTRY"].ToString();
-                            txtHPPhoneArea.Text = row["PHONE_AREA"].ToString();
-                            txtHPPhoneNumber.Text = row["PHONE_NUMBER"].ToString();
-                        }
-                        else if(PhoneType == 2)  //Office Phone
-                        {
-                            lblOfficePhoneID.Text = row["PHONE_ID"].ToString();
-                            txtOPPhoneCountry.Text = row["PHONE_COUNTRY"].ToString();
-                            txtOPPhoneArea.Text = row["PHONE_AREA"].ToString();
-                            txtOPPhoneNumber.Text = row["PHONE_NUMBER"].ToString();
-                        }
-                        else if (PhoneType == 6)  //Mobile
-                        {
-                            lblMobilePhoneID.Text = row["PHONE_ID"].ToString();
-                            txtMPPhoneCountry.Text = row["PHONE_COUNTRY"].ToString();
-                            txtMPPhoneArea.Text = row["PHONE_AREA"].ToString();
-                            txtMPPhoneNumber.Text = row["PHONE_NUMBER"].ToString();
-                        }
+        //        if (dtPhone.Rows.Count > 0)
+        //        {
+        //            foreach (DataRow row in dtPhone.Rows)
+        //            {
+        //                int PhoneType = Convert.ToInt16( row["PHONE_TYPE"]);
+        //                if(PhoneType == 1) //Home Phone
+        //                {
+        //                    lblHomePhoneID.Text = row["PHONE_ID"].ToString();
+        //                    txtHPPhoneCountry.Text = row["PHONE_COUNTRY"].ToString();
+        //                    txtHPPhoneArea.Text = row["PHONE_AREA"].ToString();
+        //                    txtHPPhoneNumber.Text = row["PHONE_NUMBER"].ToString();
+        //                }
+        //                else if(PhoneType == 2)  //Office Phone
+        //                {
+        //                    lblOfficePhoneID.Text = row["PHONE_ID"].ToString();
+        //                    txtOPPhoneCountry.Text = row["PHONE_COUNTRY"].ToString();
+        //                    txtOPPhoneArea.Text = row["PHONE_AREA"].ToString();
+        //                    txtOPPhoneNumber.Text = row["PHONE_NUMBER"].ToString();
+        //                }
+        //                else if (PhoneType == 6)  //Mobile
+        //                {
+        //                    lblMobilePhoneID.Text = row["PHONE_ID"].ToString();
+        //                    txtMPPhoneCountry.Text = row["PHONE_COUNTRY"].ToString();
+        //                    txtMPPhoneArea.Text = row["PHONE_AREA"].ToString();
+        //                    txtMPPhoneNumber.Text = row["PHONE_NUMBER"].ToString();
+        //                }
 
-                    }
-                }
+        //            }
+        //        }
 
-                Audit.CustomLog(" End: ManageContact.aspx - FillPhoneDataToForm", ContactID);
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillPhoneDataToForm", ContactID, false);
-                throw;
-            }
+        //        Audit.CustomLog(" End: ManageContact.aspx - FillPhoneDataToForm", ContactID);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillPhoneDataToForm", ContactID, false);
+        //        throw;
+        //    }
 
-        }
+        //}
 
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace Yero
                 objContact.Blog_id = txtBlogId.Text.ToString();
                 objContact.Website_url = txtWebsiteUrl.Text.ToString();
 
-
+/*
                 List<BusinessObjects.Address> lstAddress = new List<BusinessObjects.Address>();
                 if (lblRAAddressID.Text != "")
                 {
@@ -311,9 +311,9 @@ namespace Yero
                 objPhone.Phone_number = txtMPPhoneNumber.Text;
                 //objPhone.Phone_type = txtPhoneType.Text;
                 //objPhone.Phone_type = ddPhoneType.SelectedValue;
-
+                */
                 DataLayer.ManageContactDL objManageContact = new DataLayer.ManageContactDL();
-                bool bl = objManageContact.UpdateContactProfile(objContact, lstAddress, objPhone);
+                bool bl = objManageContact.UpdateContactProfile(objContact);
 
                 this.Session["SelectedContact"] = 0; // Remove ContactID from session after update
 
@@ -356,6 +356,16 @@ namespace Yero
                 Audit.CustomError(ex, "ItivoError: ManageContact.aspx - btnDeleteContact_Click", null,true);
             }
             
+        }
+
+        protected void btnManageAddress_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ViewContactAddress.aspx", false);
+        }
+
+        protected void btnManagePhone_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ViewPhone.aspx", false);
         }
 
        

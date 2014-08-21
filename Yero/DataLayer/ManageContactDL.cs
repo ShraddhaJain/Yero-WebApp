@@ -154,114 +154,13 @@ namespace Yero.DataLayer
             }
         }
 
-        /// <summary>
-        /// Gets the contact details.
-        /// </summary>
-        /// <param name="ContactId">The contact identifier.</param>
-        /// <returns></returns>
-        public DataTable GetAddressDetails(int ContactId)
-        {
-
-            try
-            {
-                Audit.CustomLog(" Start: ManageContactDL.aspx - GetContactAddressDetails", ContactId);
-
-                DatabaseProviderFactory factory = new DatabaseProviderFactory();
-                Database db = factory.Create("itivo");
-                DbConnection conn = db.CreateConnection();
-                conn.Open();
-
-                DbCommand dbCommand = db.GetStoredProcCommand("spGetAddressDetails");
-                db.AddInParameter(dbCommand, "CONT_ID", DbType.Int64, ContactId);
-
-
-                BusinessObjects.Address objAddress = new BusinessObjects.Address();
-                DataSet ds = db.ExecuteDataSet(dbCommand);
-                //if (ds.Tables[0].Rows.Count > 0)
-                //{
-                //    foreach (DataRow row in ds.Tables[0].Rows)
-                //    {
-                //        DataTable dt = ds.Tables[0];
-                //       // DataRow row = ds.Tables[0].Rows[0];
-                //        objAddress.Post_add_id = Convert.ToInt16(row["POST_ADD_ID"]);
-                //        objAddress.Cont_id = Convert.ToInt16(row["CONT_ID"]);
-                //        objAddress.Post_add_line_1 = row["POST_ADD_LINE_1"].ToString();
-                //        objAddress.Post_add_line_2 = row["POST_ADD_LINE_2"].ToString();
-                //        objAddress.Post_add_line_3 = row["POST_ADD_LINE_3"].ToString();
-                //        objAddress.Post_county = row["POST_COUNTY"].ToString();
-                //        objAddress.Post_add_info_1 = row["POST_ADD_INFO_1"].ToString();
-                //        objAddress.Post_add_info_2 = row["POST_ADD_INFO_2"].ToString();
-                //        objAddress.Post_add_attn = row["POST_ADD_ATTN"].ToString();
-                //        objAddress.Post_add_po_street = row["POST_ADD_PO_STREET"].ToString();
-                //        objAddress.Post_add_city = row["POST_ADD_CITY"].ToString();
-                //        objAddress.Post_add_state = row["POST_ADD_STATE"].ToString();
-                //        objAddress.Post_add_postal_code = row["POST_ADD_POSTAL_CODE"].ToString();
-                //        objAddress.Post_add_country = row["POST_ADD_COUNTRY"].ToString();
-                //        objAddress.Post_add_type = row["POST_ADD_TYPE"].ToString();
-                //    }
-                //}
-
-                Audit.CustomLog(" End: ManageContactDL.aspx - GetContactAddressDetails", ContactId);
-                return ds.Tables[0];
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContactDL.aspx - GetContactAddressDetails", ContactId, false);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Gets the phone details.
-        /// </summary>
-        /// <param name="PhoneID">The phone identifier.</param>
-        /// <returns></returns>
-        public DataTable GetPhoneDetails(int ContactID)
-        {
-
-            try
-            {
-                Audit.CustomLog(" Start: ManageContactPhoneDL.aspx - GetPhoneDetails", ContactID);
-
-                DatabaseProviderFactory factory = new DatabaseProviderFactory();
-                Database db = factory.Create("itivo");
-                DbConnection conn = db.CreateConnection();
-                conn.Open();
-
-                DbCommand dbCommand = db.GetStoredProcCommand("spGetPhoneDetails");
-                db.AddInParameter(dbCommand, "CONT_ID", DbType.Int64, ContactID);
-
-                DataSet ds = db.ExecuteDataSet(dbCommand);
-                DataTable dt = ds.Tables[0];
-                //BusinessObjects.Phone objPhone = new BusinessObjects.Phone();
-                //if (ds.Tables[0].Rows.Count > 0)
-                //{
-                //    DataRow row = ds.Tables[0].Rows[0];
-                //    objPhone.Cont_id = Convert.ToInt16(row["CONT_ID"]);
-                //    objPhone.Phone_id = Convert.ToInt16(row["PHONE_ID"]);
-                //    objPhone.Phone_country = row["PHONE_COUNTRY"].ToString();
-                //    objPhone.Phone_area = row["PHONE_AREA"].ToString();
-                //    objPhone.Phone_number = row["PHONE_NUMBER"].ToString();
-                //    objPhone.Phone_type = row["PHONE_TYPE"].ToString();
-                //}
-
-                Audit.CustomLog(" End: ManageContactPhoneDL.aspx - GetPhoneDetails", ContactID);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContactPhoneDL.aspx - GetPhoneDetails", ContactID, false);
-                throw;
-            }
-        }
-
         
         /// <summary>
         /// Updates the contact.
         /// </summary>
         /// <param name="objContact">The object contact.</param>
         /// <returns></returns>
-        public bool UpdateContactProfile(BusinessObjects.Contact objContact,List<BusinessObjects.Address> lstAddress, BusinessObjects.Phone objPhone)
+        public bool UpdateContactProfile(BusinessObjects.Contact objContact)
         {  
             Audit.CustomLog(" Start: ManageContactDL.aspx - UpdateContact", objContact);
 
@@ -303,7 +202,7 @@ namespace Yero.DataLayer
 
                 DataSet ds = db.ExecuteDataSet(dbCommandContact,transaction);
                 Audit.CustomLog(" End: ManageContactDL.aspx - UpdateContact - Contact Section", objContact);
-
+                /*
                 Audit.CustomLog(" Start: ManageContactDL.aspx - CreateContactProfile - Address Section", objContact);
                //Check if the address already exist then Update Address else Insert Address
                 BusinessObjects.Address objAddress = new BusinessObjects.Address();
@@ -392,7 +291,7 @@ namespace Yero.DataLayer
                 }
 
                 Audit.CustomLog(" End: ManageContactDL.aspx - CreateContactProfile - Phone Section", objContact);
-
+                */
                 transaction.Commit();
 
                 Audit.CustomLog(" End: ManageContactDL.aspx - UpdateContact", objContact);

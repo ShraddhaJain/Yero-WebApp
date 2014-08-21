@@ -17,7 +17,7 @@ namespace Yero
                 if (!IsPostBack)
                 {
 
-                    FillPhoneDataToForm(Convert.ToInt16(this.Session["SelectedPhone"]));
+                    //FillPhoneDataToForm(Convert.ToInt16(this.Session["SelectedPhone"]));
                 }
                 Audit.CustomLog(" End: ManageContact.aspx - Page_Load", null);
             }
@@ -33,57 +33,57 @@ namespace Yero
         /// Fills the contact data to form.
         /// </summary>
         /// <param name="PhoneID">The contact identifier.</param>
-        protected void FillPhoneDataToForm(int PhoneID)
-        {
-            try
-            {
-                Audit.CustomLog(" Start: ManageContact.aspx - FillContactDataToForm", PhoneID);
+        //protected void FillPhoneDataToForm(int PhoneID)
+        //{
+        //    try
+        //    {
+        //        Audit.CustomLog(" Start: ManageContact.aspx - FillContactDataToForm", PhoneID);
 
-                if (PhoneID > 0)
-                {
+        //        if (PhoneID > 0)
+        //        {
 
-                    //----Show controls as per Update---//
-                    btnAddPhone.Visible = false;
-                    btnUpdatePhone.Visible = true;
-                    btnDeletePhone.Visible = true;
+        //            //----Show controls as per Update---//
+        //            btnAddPhone.Visible = false;
+        //            btnUpdatePhone.Visible = true;
+        //            btnDeletePhone.Visible = true;
 
-                    lblPhoneId.Visible = true;
-                    lblPhoneIDValue.Visible = true;
+        //            lblPhoneId.Visible = true;
+        //            lblPhoneIDValue.Visible = true;
                     
-                    //----//
+        //            //----//
 
-                    DataLayer.ManageContactPhoneDL objManagePhone = new DataLayer.ManageContactPhoneDL();
-                    BusinessObjects.Phone objPhone = objManagePhone.GetPhoneDetails(Convert.ToInt16(PhoneID));
+        //            DataLayer.ManageContactPhoneDL objManagePhone = new DataLayer.ManageContactPhoneDL();
+        //            BusinessObjects.Phone objPhone = objManagePhone.GetPhoneDetails(Convert.ToInt16(PhoneID));
 
-                    lblPhoneIDValue.Text = objPhone.Phone_id.ToString();
-                    txtPhoneArea.Text = objPhone.Phone_area;
-                    txtPhoneCountry.Text = objPhone.Phone_country;
-                    txtPhoneNumber.Text = objPhone.Phone_number;
-                    txtPhoneType.Text = objPhone.Phone_type;
+        //            lblPhoneIDValue.Text = objPhone.Phone_id.ToString();
+        //            txtPhoneArea.Text = objPhone.Phone_area;
+        //            txtPhoneCountry.Text = objPhone.Phone_country;
+        //            txtPhoneNumber.Text = objPhone.Phone_number;
+        //            txtPhoneType.Text = objPhone.Phone_type;
 
-                }
-                else
-                {
-                    //----Show controls as per Add---//
-                    btnAddPhone.Visible = true;
-                    btnUpdatePhone.Visible = false;
-                    btnDeletePhone.Visible = false;
+        //        }
+        //        else
+        //        {
+        //            //----Show controls as per Add---//
+        //            btnAddPhone.Visible = true;
+        //            btnUpdatePhone.Visible = false;
+        //            btnDeletePhone.Visible = false;
 
-                    lblPhoneId.Visible = false;
-                    lblPhoneIDValue.Visible = false;
-                    lblPhoneIDValue.Text = "";
-                    //-------//
-                }
+        //            lblPhoneId.Visible = false;
+        //            lblPhoneIDValue.Visible = false;
+        //            lblPhoneIDValue.Text = "";
+        //            //-------//
+        //        }
 
-                Audit.CustomLog(" End: ManageContact.aspx - FillContactDataToForm", PhoneID);
-            }
-            catch (Exception ex)
-            {
-                Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillContactDataToForm", PhoneID, false);
-                throw;
-            }
+        //        Audit.CustomLog(" End: ManageContact.aspx - FillContactDataToForm", PhoneID);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Audit.CustomError(ex, "ItivoError: ManageContact.aspx - FillContactDataToForm", PhoneID, false);
+        //        throw;
+        //    }
 
-        }
+        //}
 
         /// <summary>
         /// Handles the Click event of the btnAddContactPhone control.

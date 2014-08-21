@@ -97,9 +97,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ManageCategoryDL.cs" />
+    <Compile Include="ManageContactAddressDL.cs" />
     <Compile Include="ManageContactDL.cs" />
     <Compile Include="ManageContactPhoneDL.cs" />
     <Compile Include="ManageLookupDL.cs" />
+    <Compile Include="ManageOrderDL.cs" />
     <Compile Include="ManageRolePermissionsDL.cs" />
     <Compile Include="ManageSearchContactDL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

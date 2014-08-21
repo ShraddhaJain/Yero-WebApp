@@ -195,11 +195,13 @@
     <Content Include="ManageContact.aspx" />
     <Content Include="ManageContactAddress.aspx" />
     <Content Include="ManageContactPhone.aspx" />
+    <Content Include="ManageOrder.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="ViewContactAddress.aspx" />
     <Content Include="ViewPhone.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="Welcome.aspx" />
@@ -353,6 +355,13 @@
     <Compile Include="ManageContactPhone.aspx.designer.cs">
       <DependentUpon>ManageContactPhone.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManageOrder.aspx.cs">
+      <DependentUpon>ManageOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageOrder.aspx.designer.cs">
+      <DependentUpon>ManageOrder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -390,6 +399,13 @@
     </Compile>
     <Compile Include="ViewContact.aspx.designer.cs">
       <DependentUpon>ViewContact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewContactAddress.aspx.cs">
+      <DependentUpon>ViewContactAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewContactAddress.aspx.designer.cs">
+      <DependentUpon>ViewContactAddress.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewPhone.aspx.cs">
       <DependentUpon>ViewPhone.aspx</DependentUpon>

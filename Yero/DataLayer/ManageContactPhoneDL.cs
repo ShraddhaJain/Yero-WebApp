@@ -95,7 +95,7 @@ namespace Yero.DataLayer
         /// </summary>
         /// <param name="PhoneID">The phone identifier.</param>
         /// <returns></returns>
-        public BusinessObjects.Phone GetPhoneDetails(int ContactID)
+        public DataTable GetPhoneDetails(int ContactID)
         {
 
             try
@@ -112,20 +112,20 @@ namespace Yero.DataLayer
 
                 DataSet ds = db.ExecuteDataSet(dbCommand);
                 DataTable dt = ds.Tables[0];
-                BusinessObjects.Phone objPhone = new BusinessObjects.Phone();
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    DataRow row = ds.Tables[0].Rows[0];
-                    objPhone.Cont_id = Convert.ToInt16(row["CONT_ID"]);
-                    objPhone.Phone_id = Convert.ToInt16(row["PHONE_ID"]);
-                    objPhone.Phone_country = row["PHONE_COUNTRY"].ToString();
-                    objPhone.Phone_area = row["PHONE_AREA"].ToString();
-                    objPhone.Phone_number = row["PHONE_NUMBER"].ToString();
-                    objPhone.Phone_type = row["PHONE_TYPE"].ToString();
-                }
+                //BusinessObjects.Phone objPhone = new BusinessObjects.Phone();
+                //if (ds.Tables[0].Rows.Count > 0)
+                //{
+                //    DataRow row = ds.Tables[0].Rows[0];
+                //    objPhone.Cont_id = Convert.ToInt16(row["CONT_ID"]);
+                //    objPhone.Phone_id = Convert.ToInt16(row["PHONE_ID"]);
+                //    objPhone.Phone_country = row["PHONE_COUNTRY"].ToString();
+                //    objPhone.Phone_area = row["PHONE_AREA"].ToString();
+                //    objPhone.Phone_number = row["PHONE_NUMBER"].ToString();
+                //    objPhone.Phone_type = row["PHONE_TYPE"].ToString();
+                //}
 
                 Audit.CustomLog(" End: ManageContactPhoneDL.aspx - GetPhoneDetails", ContactID);
-                return objPhone;
+                return dt;
             }
             catch (Exception ex)
             {
@@ -153,7 +153,6 @@ namespace Yero.DataLayer
 
                 DbCommand dbCommand = db.GetStoredProcCommand("spUpdatePhone");
                 db.AddInParameter(dbCommand, "PHONE_ID", DbType.Int64, objPhone.Phone_id);
-                db.AddInParameter(dbCommand, "CONT_ID", DbType.Int64, objPhone.Cont_id);
                 db.AddInParameter(dbCommand, "PHONE_COUNTRY", DbType.String, objPhone.Phone_country);
                 db.AddInParameter(dbCommand, "PHONE_AREA", DbType.String, objPhone.Phone_area);
                 db.AddInParameter(dbCommand, "PHONE_NUMBER", DbType.String, objPhone.Phone_number);
