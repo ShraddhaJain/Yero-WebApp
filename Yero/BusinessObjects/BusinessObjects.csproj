@@ -7,8 +7,8 @@
     <ProjectGuid>{2ED1E27C-DB1F-4027-993A-01327EC7BEF2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BusinessObjects</RootNamespace>
-    <AssemblyName>BusinessObjects</AssemblyName>
+    <RootNamespace>Yero.BusinessObjects</RootNamespace>
+    <AssemblyName>Yero.BusinessObjects</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

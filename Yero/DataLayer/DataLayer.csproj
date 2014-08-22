@@ -93,9 +93,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheUtility.cs" />
     <Compile Include="ManageCategoryDL.cs" />
     <Compile Include="ManageContactAddressDL.cs" />
     <Compile Include="ManageContactDL.cs" />
@@ -123,7 +126,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51104</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

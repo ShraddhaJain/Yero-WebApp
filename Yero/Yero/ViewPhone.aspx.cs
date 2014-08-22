@@ -5,12 +5,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-
+using Yero.BusinessObjects;
 
 namespace Yero
 {
     public partial class ViewPhone : System.Web.UI.Page
     {
+        Cache objCache = new Cache("mycache");
+        private static object _cacheLock = new object();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -28,7 +31,30 @@ namespace Yero
 
 
                 DataLayer.ManageLookupDL objManageLookUp = new DataLayer.ManageLookupDL();
-                DataTable dtLookupPhone = objManageLookUp.GetLookupDetailValues("Phone");
+
+                DataTable dtLookupPhone = (DataTable)objCache.getCache("PhoneLkUp");
+
+                if (dtLookupPhone == null)
+                {
+                    // lock this section of the code while we populate this.
+                    lock (_cacheLock)
+                    {
+                        // only populate if this was not populated by another thread while this thread was waiting
+                        dtLookupPhone = (DataTable)objCache.getCache("PhoneLkUp");
+                        if (dtLookupPhone == null)
+                        {
+                            dtLookupPhone = objManageLookUp.GetLookupDetailValues("phone");
+                            bool boolPhone = objCache.setCache(dtLookupPhone, "PhoneLkUp");
+                            if (boolPhone == false)
+                                Audit.CustomLog(" WARNING: ManageContact.aspx - PhoneLkUp - Cache is not setting", dtLookupPhone);
+                        }
+                    }
+                }
+
+
+
+
+                //DataTable dtLookupPhone = objManageLookUp.GetLookupDetailValues("Phone");
 
                 if (dtLookupPhone.Rows.Count > 0)
                 {

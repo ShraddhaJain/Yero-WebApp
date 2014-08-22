@@ -24,12 +24,12 @@ namespace Yero.BusinessObjects
                 Audit.CustomLog("Start :Cache - setCache", objVal);
                 if (!cacheManager.Contains("objKey"))
                 {
-                    cacheManager.Add(objKey, objVal, CacheItemPriority.Low, null, new SlidingTime(new TimeSpan(0, 0, 10)));
+                    cacheManager.Add(objKey, objVal, CacheItemPriority.Low, null, new SlidingTime(new TimeSpan(0, 15, 0)));
                 }
                 else
                 {
                     cacheManager.Remove(objKey);
-                    cacheManager.Add(objKey, objVal, CacheItemPriority.Low, null, new SlidingTime(new TimeSpan(0, 0, 10)));
+                    cacheManager.Add(objKey, objVal, CacheItemPriority.Low, null, new SlidingTime(new TimeSpan(0, 15, 0)));
 
                 }
                 Audit.CustomLog("End :Cache - setCache", objVal);
