@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-
+    <asp:HyperLink ID="lnkBacktoContact" runat="server" NavigateUrl="~/ManageContact.aspx">Go back to Contact Details</asp:HyperLink>
     <asp:GridView ID="grdAddress" runat="server" AutoGeneteColumns="False" AutoGenerateColumns="False" OnSelectedIndexChanged="grdAddress_SelectedIndexChanged" AutoGenerateSelectButton="True">
         <Columns>
             <asp:BoundField DataField="POST_ADD_ID" HeaderText="Address ID" NullDisplayText=" "/>

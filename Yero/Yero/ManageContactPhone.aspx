@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="ManageContactPhone.aspx.cs" Inherits="Yero.ManageContactPhone" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <table id="tblPhone">
+    <asp:HyperLink ID="lnkBacktoContact" runat="server" NavigateUrl="~/ManageContact.aspx">Go back to Contact Details</asp:HyperLink>
+   
+     <table id="tblPhone">
         
          <tr>
             <td>

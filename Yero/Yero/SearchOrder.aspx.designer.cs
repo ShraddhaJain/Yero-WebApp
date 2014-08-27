@@ -10,132 +10,96 @@
 namespace Yero {
     
     
-    public partial class ManageContactPhone {
+    public partial class SearchOrder {
         
         /// <summary>
-        /// lnkBacktoContact control.
+        /// lblOrderStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkBacktoContact;
+        protected global::System.Web.UI.WebControls.Label lblOrderStatus;
         
         /// <summary>
-        /// lblPhoneId control.
+        /// lblOrderNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPhoneId;
+        protected global::System.Web.UI.WebControls.Label lblOrderNumber;
         
         /// <summary>
-        /// lblPhoneIDValue control.
+        /// lblOrderDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPhoneIDValue;
+        protected global::System.Web.UI.WebControls.Label lblOrderDate;
         
         /// <summary>
-        /// lblPhoneCountry control.
+        /// lblCustomerName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPhoneCountry;
+        protected global::System.Web.UI.WebControls.Label lblCustomerName;
         
         /// <summary>
-        /// txtPhoneCountry control.
+        /// txtOrderStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhoneCountry;
+        protected global::System.Web.UI.WebControls.TextBox txtOrderStatus;
         
         /// <summary>
-        /// lblPhoneArea control.
+        /// txtOrderNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPhoneArea;
+        protected global::System.Web.UI.WebControls.TextBox txtOrderNumber;
         
         /// <summary>
-        /// txtPhoneArea control.
+        /// txtOrderDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhoneArea;
+        protected global::System.Web.UI.WebControls.TextBox txtOrderDate;
         
         /// <summary>
-        /// lblPhoneNumber control.
+        /// txtCustomerName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPhoneNumber;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerName;
         
         /// <summary>
-        /// txtPhoneNumber control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhoneNumber;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// lblPhoneType control.
+        /// grdSearchResult control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPhoneType;
-        
-        /// <summary>
-        /// txtPhoneType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhoneType;
-        
-        /// <summary>
-        /// btnAddPhone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddPhone;
-        
-        /// <summary>
-        /// btnUpdatePhone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdatePhone;
-        
-        /// <summary>
-        /// btnDeletePhone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeletePhone;
+        protected global::System.Web.UI.WebControls.GridView grdSearchResult;
     }
 }

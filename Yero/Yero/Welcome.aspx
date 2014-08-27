@@ -14,8 +14,11 @@
     <asp:Menu ID="Menu1" runat="server">
         <Items>
             <asp:MenuItem Text="Contact" NavigateUrl="~/ViewContact.aspx"></asp:MenuItem>
+            <asp:MenuItem Text="Search Contact" NavigateUrl="~/ContactSearch.aspx"></asp:MenuItem>
             <asp:MenuItem Text="Categories" NavigateUrl="~/ViewCategory.aspx"></asp:MenuItem>
-
+            <asp:MenuItem Text="Create Order" NavigateUrl="~/ManageOrder.aspx"></asp:MenuItem>
+            <asp:MenuItem Text="Search Order" NavigateUrl="~/SearchOrder.aspx"></asp:MenuItem>
+            <asp:MenuItem Text="Categories" NavigateUrl="~/ViewCategory.aspx"></asp:MenuItem>
         </Items>
         
     </asp:Menu>

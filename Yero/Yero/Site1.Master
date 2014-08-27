@@ -10,10 +10,14 @@
         E-Commerce Master Page header
         
     </asp:ContentPlaceHolder>
+    
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+        <div>
+             <asp:HyperLink ID="HyperLink1" NavigateUrl="~/Welcome.aspx" runat="server">Go to Home Page</asp:HyperLink>
+        </div>
+        <div>
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
         
         </asp:ContentPlaceHolder>

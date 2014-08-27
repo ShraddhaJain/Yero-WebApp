@@ -45,6 +45,19 @@
     <asp:Panel runat="server" ID="pnlOrderDetails">
         <table>
             <tr>
+                <td>Order Record:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:GridView ID="grdOrder" runat="server"></asp:GridView>
+                </td>
+            </tr>
+            <tr>
+                <td>Order Details :
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <asp:GridView ID="grdOrderDetails" runat="server"></asp:GridView>
                 </td>
